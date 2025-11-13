@@ -2,7 +2,7 @@
 
 1. **Create new markdown file**
 Under path `works/motion/` or `works/visual/` etc to add new .md file：
-
+```
 ---
 title: "WORK TITAL"
 description: "DESC"
@@ -11,6 +11,7 @@ date: "2024"
 tags: ["tag1", "tag2"]
 category: "motion-design"
 ---
+```
 
 ```
 ↑ These info is needed to let the backend know what your works are.
