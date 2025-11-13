@@ -29,7 +29,7 @@ function processYouTubeShortcodes(content) {
     const videoId = extractYouTubeId(url.trim());
 
     if (!videoId) {
-      console.warn(`無法從 URL 提取 YouTube ID: ${url}`);
+      console.warn(`Cannot fetch the Youtube ID through URL: ${url}`);
       return match; // 如果無法提取 ID，保持原始文本
     }
 
@@ -324,7 +324,7 @@ class PageGenerator {
     const works = await this.getAllWorks();
     const generatedPages = [];
 
-    console.log(`找到 ${works.length} 個作品，開始生成頁面...`);
+    console.log(`Find ${works.length} works, starting to generate pages...`);
 
     for (const work of works) {
       try {
@@ -333,9 +333,9 @@ class PageGenerator {
           work: work,
           path: outputPath,
         });
-        console.log(`✓ 已生成: ${work.title} -> ${outputPath}`);
+        console.log(`✓ Generated: ${work.title} -> ${outputPath}`);
       } catch (error) {
-        console.error(`✗ 生成失敗: ${work.title}`, error);
+        console.error(`✗ Failed to generate: ${work.title}`, error);
       }
     }
 
@@ -378,11 +378,11 @@ class PageGenerator {
     const missingPages = await this.checkMissingPages();
 
     if (missingPages.length === 0) {
-      console.log("所有作品頁面都是最新的");
+      console.log("All pages are up to date");
       return [];
     }
 
-    console.log(`需要生成/更新 ${missingPages.length} 個頁面`);
+    console.log(`Need to generate/update ${missingPages.length} pages`);
 
     const generatedPages = [];
 
@@ -393,9 +393,9 @@ class PageGenerator {
           work: work,
           path: outputPath,
         });
-        console.log(`✓ 已生成/更新: ${work.title}`);
+        console.log(`✓ Generated/Updated: ${work.title}`);
       } catch (error) {
-        console.error(`✗ 生成失敗: ${work.title}`, error);
+        console.error(`✗ Failed to generate: ${work.title}`, error);
       }
     }
 
