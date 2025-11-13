@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website specifically built for **Motion Designers**, combining smooth animations, an elegant user experience, and an extremely simplified content management workflow.
 
-![Preview](https://files.catbox.moe/mw7ldo.png)
+![Preview](https://files.catbox.moe/vc7w0u.png)
 
 [中文版](https://github.com/Batkixni/Bax-Portfolio/blob/main/ReadMe-Zh.md)
 
