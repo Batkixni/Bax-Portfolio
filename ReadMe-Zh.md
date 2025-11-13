@@ -122,11 +122,11 @@ node generate-blog.js
 
 本專案使用以下開源套件，其授權條款與網頁資訊如下：
 
-| 套件名稱 | 官方網頁 (Website) | 授權條款 (License) | 備註 |
-| :--- | :--- | :--- | :--- |
-| [**GSAP**](https://gsap.com/) | **Standard "No-Charge" License** | 適用於大多數非商業專案；商業用途或高級功能需 Club 授權。 |
-| [**p5.js**](https://p5js.org/) | **GNU Lesser General Public License 2.1 (LGPL 2.1)** | 允許自由使用、修改，但修改後的程式碼需以 LGPL 授權釋出。 |
-| [**HTMX**](https://htmx.org/) | **MIT License** | 寬鬆的開源授權。 |
-| [**Vidstack**](https://www.vidstack.io/) | **MIT License** | 寬鬆的開源授權。 |
+| 套件名稱 | 授權條款 (License) |
+| :--- | :--- | 
+| [**GSAP**](https://gsap.com/) | **Standard "No-Charge" License** | 
+| [**p5.js**](https://p5js.org/) | **GNU Lesser General Public License 2.1 (LGPL 2.1)** | 
+| [**HTMX**](https://htmx.org/) | **MIT License** | 
+| [**Vidstack**](https://www.vidstack.io/) | **MIT License** | 
 
 本專案本身採用 **MIT 授權條款**。
