@@ -38,7 +38,7 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 
 1.  Clone the project
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Batkixni/Bax-Portfolio.git
     cd bax-website
     ```
 
