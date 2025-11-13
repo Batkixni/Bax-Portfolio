@@ -3,7 +3,7 @@ const path = require("path");
 
 // Build script for the portfolio website
 async function build() {
-  console.log("🏗️  開始建構網站...");
+  console.log("🏗️  Start Building Website...");
 
   try {
     // Ensure all directories exist
@@ -18,7 +18,7 @@ async function build() {
 
     for (const dir of directories) {
       await fs.ensureDir(dir);
-      console.log(`✅ 確保目錄存在: ${dir}`);
+      console.log(`✅ Ensure the Catalogs Exist: ${dir}`);
     }
 
     // Create placeholder images if they don't exist
@@ -41,7 +41,7 @@ async function build() {
 </svg>`;
 
         await fs.writeFile(imagePath.replace(".jpg", ".svg"), svgContent);
-        console.log(`✅ 創建占位圖片: ${imagePath.replace(".jpg", ".svg")}`);
+        console.log(`✅ Create Placeholder Images: ${imagePath.replace(".jpg", ".svg")}`);
       }
     }
 
@@ -52,7 +52,7 @@ async function build() {
       if (await fs.pathExists(workDir)) {
         const files = await fs.readdir(workDir);
         const mdFiles = files.filter((file) => file.endsWith(".md"));
-        console.log(`✅ ${workDir} 包含 ${mdFiles.length} 個作品文件`);
+        console.log(`✅ ${workDir} contain ${mdFiles.length} work files`);
       }
     }
 
@@ -67,20 +67,20 @@ async function build() {
 
     for (const file of requiredFiles) {
       if (await fs.pathExists(file)) {
-        console.log(`✅ 檔案存在: ${file}`);
+        console.log(`✅ File Exist: ${file}`);
       } else {
-        console.log(`❌ 檔案缺失: ${file}`);
+        console.log(`❌ File Gone: ${file}`);
       }
     }
 
-    console.log("\n🎉 建構完成！");
-    console.log("\n📋 接下來的步驟:");
-    console.log("1. 執行 `pnpm install` 安裝依賴");
-    console.log("2. 將您的作品圖片放入 src/images/ 目錄");
-    console.log("3. 執行 `pnpm run dev` 啟動開發伺服器");
-    console.log("4. 在瀏覽器中打開 http://localhost:3000");
+    console.log("\n🎉 Build Complete");
+    console.log("\n📋 Next Up Steps");
+    console.log("1. Run `yarn` to install dependences");
+    console.log("2. Put your work image into src/images/");
+    console.log("3. Run `yarn dev` to start the develop server");
+    console.log("4. Open http://localhost:3000 in your browser");
   } catch (error) {
-    console.error("❌ 建構過程中發生錯誤:", error);
+    console.error("❌ Error while building the website:", error);
   }
 }
 
