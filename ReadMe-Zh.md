@@ -2,7 +2,7 @@
 
 一個專為**動態設計師 (Motion Designers)** 打造的現代化響應式作品集網站，結合了流暢的動畫效果、優雅的使用者體驗以及極致簡化的內容管理流程。
 
-![Preview](https://files.catbox.moe/vc7w0u.png)
+![Preview](https://files.catbox.moe/opt3u1.jpg)
 
 ## 🌠 核心功能特色 (Core Key Features)
 
