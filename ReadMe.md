@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website specifically built for **Motion Designers**, combining smooth animations, an elegant user experience, and an extremely simplified content management workflow.
 
+![Preview](https://files.catbox.moe/mw7ldo.png)
+
+[中文版](https://github.com/Batkixni/Bax-Portfolio/blob/main/ReadMe-Zh.md)
+
 ## 🌠 Core Key Features
 
 ### Portfolio & Content Management
@@ -127,10 +131,10 @@ node generate-blog.js
 This project uses the following open-source packages. Their license terms and official websites are noted below:
 
 | Package Name | Official Website | License | Note |
-| :--- | :--- | :--- | :--- |
-| [**GSAP** ](https://gsap.com/)| **Standard "No-Charge" License** / **Club GreenSock License** | Applicable for most non-commercial projects; commercial use or premium features require a Club License. |
-| [**p5.js** ](https://p5js.org/ )| **GNU Lesser General Public License 2.1 (LGPL 2.1)** | Allows free use and modification, but modified code must be released under the LGPL license. |
-| [**HTMX** |](https://htmx.org/ ) **MIT License** | A permissive open-source license. |
-| [**Vidstack** ](https://www.vidstack.io/ )| **MIT License** | A permissive open-source license. |
+| :--- | :--- | 
+| [**GSAP** ](https://gsap.com/)| **Standard "No-Charge" License** | 
+| [**p5.js** ](https://p5js.org/ )| **GNU Lesser General Public License 2.1 (LGPL 2.1)** | 
+| [**HTMX**](https://htmx.org/ )| **MIT License** | 
+| [**Vidstack** ](https://www.vidstack.io/ )| **MIT License** |
 
 This project itself is licensed under the **MIT License**.
