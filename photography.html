@@ -3,20 +3,15 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{{title}} - Bax Portfolio</title>
-        <meta name="description" content="{{description}}" />
+        <title>Bax - Photography</title>
+        <meta name="description" content="Bax's Photography Portfolio" />
 
         <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="article" />
-        <meta
-            property="og:url"
-            content="https://bax.sorai.tw/{{category}}/{{id}}"
-        />
-        <meta property="og:title" content="{{title}} - Bax Portfolio" />
-        <meta property="og:description" content="{{description}}" />
-        {{#image}}
-        <meta property="og:image" content="{{image}}" />
-        {{/image}}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bax.sorai.tw/photography" />
+        <meta property="og:title" content="Bax - Photography Portfolio" />
+        <meta property="og:description" content="Photography Portfolio" />
+        <meta property="og:image" content="./src/images/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Bax Portfolio" />
@@ -26,40 +21,19 @@
         <meta property="twitter:card" content="summary_large_image" />
         <meta
             property="twitter:url"
-            content="https://bax.sorai.tw/work/{{category}}/{{id}}"
+            content="https://bax.sorai.tw/photography"
         />
-        <meta property="twitter:title" content="{{title}} - Bax Portfolio" />
-        <meta property="twitter:description" content="{{description}}" />
-        {{#image}}
-        <meta property="twitter:image" content="{{image}}" />
-        {{/image}}
+        <meta property="twitter:title" content="Bax - Photography Portfolio" />
+        <meta property="og:description" content="Photography Portfolio" />
+        <meta property="og:image" content="../src/images/og-image.png" />
 
         <link rel="icon" type="image/jpeg" href="/src/images/favico.jpg" />
         <link rel="stylesheet" href="/src/css/style.css" />
-
-        <!-- Vidstack Player CSS -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.vidstack.io/player/theme.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdn.vidstack.io/player/video.css"
-        />
-
+        <link rel="stylesheet" href="/src/css/photography.css" />
         <script src="/src/lib/htmx.min.js"></script>
         <script src="/src/lib/gsap.min.js"></script>
         <script src="/src/lib/ScrollTrigger.min.js"></script>
         <script src="/src/lib/p5.min.js"></script>
-
-        <!-- Vidstack Player JavaScript -->
-        <script type="module" src="https://cdn.vidstack.io/player"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -128,57 +102,40 @@
             </button>
         </nav>
 
-        <!-- Work Detail Content -->
-        <main class="work-detail-page">
-            <!-- Fullscreen Hero Image -->
-            {{#image}}
-            <div class="work-hero-fullscreen">
-                <div class="work-hero-cover"></div>
-                <img src="{{image}}" alt="{{title}}" class="work-hero-bg" />
-                <div class="work-hero-overlay">
-                    <div class="work-hero-nav">
-                        <div class="work-category-hero">{{category}}</div>
-                    </div>
-                    <div class="scroll-indicator">
-                        <span>Scroll</span>
-                        <div class="scroll-arrow">↓</div>
-                    </div>
-                </div>
-            </div>
-            {{/image}}
-
-            <!-- Work Info Section -->
-            <section class="work-info-section">
-                <div class="work-info-container">
-                    <h1 class="work-title">{{title}}</h1>
-                    <div class="work-meta-row">
-                        <div class="work-info-left">
-                            <p class="work-description">{{description}}</p>
-                        </div>
-                        <div class="work-info-right">
-                            {{#date}}
-                            <div class="work-date">{{date}}</div>
-                            {{/date}} {{#tags}}
-                            <div class="work-tags">
-                                {{#each tags}}
-                                <span class="work-tag">{{this}}</span>
-                                {{/each}}
-                            </div>
-                            {{/tags}}
-                        </div>
-                    </div>
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Hero Section -->
+            <section class="photography-hero animate-element">
+                <div class="photography-hero-content">
+                    <h1 class="photography-title animate-element">
+                        Photography
+                    </h1>
                 </div>
             </section>
 
-            <!-- Work Content -->
-            <section class="work-content-section">
-                <div class="work-content-container">
-                    <article class="work-content animate-element">
-                        <div class="work-article">{{content}}</div>
-                    </article>
+            <!-- Photography Grid Section -->
+            <section class="photography-section animate-element">
+                <div class="photography-grid" id="photography-grid">
+                    <!-- Photos will be loaded here dynamically -->
+                    <div class="loading">載入攝影作品中...</div>
                 </div>
             </section>
         </main>
+
+        <!-- Photo Modal -->
+        <div id="photo-modal" class="photo-modal">
+            <div class="photo-modal-content">
+                <span class="photo-modal-close">&times;</span>
+                <div class="photo-modal-body">
+                    <div class="photo-modal-image">
+                        <img id="modal-photo" src="" alt="" />
+                    </div>
+                    <div class="photo-modal-info">
+                        <h2 id="modal-title"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
         <footer class="footer animate-element">
@@ -206,47 +163,6 @@
         <script src="/src/js/animations.js"></script>
         <script src="/src/js/app.js"></script>
         <script src="/src/js/particles.js"></script>
-
-        <!-- Vidstack Player Initialization -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Initialize all video players
-                const videoPlayers = document.querySelectorAll("media-player");
-                videoPlayers.forEach((player) => {
-                    player.addEventListener("can-play", () => {
-                        console.log("Video player ready:", player.id);
-
-                        // 調試畫質選項
-                        setTimeout(() => {
-                            const qualities = player.qualities;
-                            console.log(
-                                "Available qualities:",
-                                qualities?.length || 0,
-                            );
-                            if (qualities) {
-                                qualities.forEach((quality, index) => {
-                                    console.log(`Quality ${index}:`, {
-                                        height: quality.height,
-                                        width: quality.width,
-                                        bitrate: quality.bitrate,
-                                        selected: quality.selected,
-                                    });
-                                });
-                            }
-                        }, 2000);
-                    });
-
-                    // 監聽provider變化
-                    player.addEventListener("provider-change", (event) => {
-                        console.log("Provider changed:", event.detail.provider);
-                    });
-
-                    // 監聽畫質變化
-                    player.addEventListener("qualities-change", (event) => {
-                        console.log("Qualities changed:", event.detail);
-                    });
-                });
-            });
-        </script>
+        <script src="/src/js/photography.js"></script>
     </body>
 </html>

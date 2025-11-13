@@ -2,8 +2,60 @@ let particles = [];
 let numParticles = 50;
 let canvas;
 let particlesStarted = false;
+let particlesInitialized = false;
+
+// Check motion preferences
+function shouldRenderParticles() {
+  return window.motionPrefs
+    ? window.motionPrefs.shouldAnimate("particles")
+    : true;
+}
+
+// 檢查是否為瀏覽器回退
+function isBackNavigation() {
+  return (
+    (window.performance &&
+      window.performance.navigation &&
+      window.performance.navigation.type ===
+        window.performance.navigation.TYPE_BACK_FORWARD) ||
+    (window.performance &&
+      window.performance.getEntriesByType &&
+      window.performance.getEntriesByType("navigation")[0] &&
+      window.performance.getEntriesByType("navigation")[0].type ===
+        "back_forward")
+  );
+}
 
 function setup() {
+  const isBack = isBackNavigation();
+
+  // Check if particles should be disabled due to motion preferences
+  if (!shouldRenderParticles()) {
+    console.log("Particles disabled due to motion preferences");
+    const canvasContainer = document.getElementById("canvas-container");
+    if (canvasContainer) {
+      canvasContainer.style.display = "none";
+    }
+    return;
+  }
+
+  // 防止重複初始化，除非是瀏覽器回退
+  if (particlesInitialized && !isBack) {
+    console.log("Particles already initialized, skipping setup");
+    return;
+  }
+
+  if (isBack) {
+    console.log("Back navigation detected, reinitializing particles");
+    // 重置狀態
+    particlesInitialized = false;
+    particlesStarted = false;
+    particles = [];
+  }
+
+  particlesInitialized = true;
+  console.log("Initializing particles system");
+
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("canvas-container");
 
@@ -13,8 +65,14 @@ function setup() {
     particles.push(new Particle());
   }
 
-  // Check if loading is complete
-  checkLoadingStatus();
+  // 如果是瀏覽器回退，立即啟動粒子
+  if (isBack) {
+    particlesStarted = true;
+    console.log("Particles started immediately for back navigation");
+  } else {
+    // Check if loading is complete
+    checkLoadingStatus();
+  }
 }
 
 function checkLoadingStatus() {
@@ -26,7 +84,10 @@ function checkLoadingStatus() {
   }
 
   // Loading complete, start particles
-  particlesStarted = true;
+  if (!particlesStarted) {
+    particlesStarted = true;
+    console.log("Particles animation started");
+  }
 }
 
 function draw() {
@@ -44,7 +105,9 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  if (canvas && particlesInitialized) {
+    resizeCanvas(windowWidth, windowHeight);
+  }
 }
 
 class Particle {
@@ -90,6 +153,19 @@ class Particle {
 
 // Listen for theme changes
 document.addEventListener("DOMContentLoaded", function () {
+  const isBack = isBackNavigation();
+
+  // 防止重複設置觀察器，除非是瀏覽器回退
+  if (window.particleThemeObserverSetup && !isBack) {
+    return;
+  }
+
+  if (isBack) {
+    console.log("Back navigation detected, resetting particle theme observer");
+  }
+
+  window.particleThemeObserverSetup = true;
+
   const observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       if (
@@ -97,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mutation.attributeName === "data-theme"
       ) {
         // Theme changed, particles will update their colors in the next frame
+        console.log("Theme changed, particles will update colors");
       }
     });
   });
@@ -105,4 +182,26 @@ document.addEventListener("DOMContentLoaded", function () {
     attributes: true,
     attributeFilter: ["data-theme"],
   });
+});
+
+// 處理瀏覽器回退
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted || isBackNavigation()) {
+    console.log(
+      "Page restored from cache or back navigation - resetting particles",
+    );
+
+    // 重置粒子系統狀態
+    particlesInitialized = false;
+    particlesStarted = false;
+    particles = [];
+    window.particleThemeObserverSetup = false;
+
+    // 重新初始化粒子系統
+    setTimeout(() => {
+      if (typeof setup === "function") {
+        setup();
+      }
+    }, 100);
+  }
 });

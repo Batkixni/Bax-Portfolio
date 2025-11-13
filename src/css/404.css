@@ -26,8 +26,9 @@ body {
 
 /* Main 404 Number */
 .error-number {
+    font-family: "Noto Sans", sans-serif;
     font-size: clamp(6rem, 15vw, 12rem);
-    font-weight: 900;
+    font-weight: 700;
     line-height: 0.8;
     margin-bottom: 2rem;
     color: var(--text-color);
@@ -40,8 +41,9 @@ body {
 
 /* Error Title */
 .error-title {
+    font-family: "Noto Sans", sans-serif;
     font-size: clamp(1.5rem, 4vw, 3rem);
-    font-weight: 300;
+    font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-color);
     opacity: 0.9;
@@ -50,8 +52,9 @@ body {
 
 /* Error Message */
 .error-message {
+    font-family: "Noto Sans", sans-serif;
     font-size: clamp(1rem, 2vw, 1.2rem);
-    font-weight: 300;
+    font-weight: 500;
     line-height: 1.6;
     margin-bottom: 3rem;
     color: var(--text-color);
@@ -69,17 +72,19 @@ body {
 
 /* 404 Page Buttons */
 .btn-404 {
+    font-family: "Noto Sans", sans-serif;
     padding: 1rem 2rem;
     background: transparent;
     color: var(--text-color);
     border: 2px solid var(--text-color);
     text-decoration: none;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 1px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    display: inline-block;
     min-width: 150px;
     border-radius: 25px;
     cursor: pointer;
@@ -309,9 +314,10 @@ body {
     border-radius: 50%;
     text-decoration: none;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
+    font-family: "Noto Sans", sans-serif;
     backdrop-filter: blur(10px);
     opacity: 0.9;
 }

@@ -4,12 +4,36 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bax - Portfolio</title>
+        <meta name="description" content="Visual designer / STUDIO SORAI" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bax.sorai.tw/" />
+        <meta property="og:title" content="Bax - Creative Portfolio" />
+        <meta property="og:description" content="Visual designer / STUDIO SORAI" />
+        <meta property="og:image" content="./src/images/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Bax Portfolio" />
+        <meta property="og:locale" content="zh_TW" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://bax.sorai.tw/" />
+        <meta property="twitter:title" content="Bax - Creative Portfolio" />
+        <meta property="og:description" content="Visual designer / STUDIO SORAI" />
+        <meta property="og:image" content="./src/images/og-image.png" />
+
         <link rel="icon" type="image/jpeg" href="src/images/favico.jpg" />
         <link rel="stylesheet" href="src/css/style.css" />
-        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+        <script src="src/lib/htmx.min.js"></script>
+        <script src="src/lib/gsap.min.js"></script>
+        <script src="src/lib/ScrollTrigger.min.js"></script>
+        <script src="src/lib/p5.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     </head>
     <body>
         <!-- Loading Screen -->
@@ -39,17 +63,17 @@
         <div class="cursor-follower"></div>
 
         <!-- Navigation -->
-        <nav class="nav animate-element">
+        <nav class="nav">
             <div class="nav-brand">
                     <h1>Bax</h1>
                 </a>
             </div>
             <div class="nav-links">
                 <a href="#motion" class="nav-link" data-section="motion"
-                    >Motion</a
+                    >Works</a
                 >
-                <a href="#graphic" class="nav-link" data-section="graphic"
-                    >Visual</a
+                <a href="photography" class="nav-link"
+                    >Photography</a
                 >
             </div>
             <button
@@ -67,13 +91,12 @@
             <section class="hero animate-element">
                 <div class="hero-content">
                     <img src="src/images/header.jpg" alt="Bax" class="hero-avatar animate-element" />
-                    <h1 class="hero-title animate-element">Bax show</h1>
+                    <h1 class="hero-title animate-element">Bax</h1>
                 </div>
                 <p class="hero-subtitle animate-element">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Visual designer / Founder of STUDIO SORAI <br/>
+                    Contact: bax@sorai.tw <br/>
+                    A 20 yo self-taught designer have experience in graphic design and motion design. Currently working as a freelancer.
                 </p>
             </section>
 
@@ -88,233 +111,42 @@
                 <div
                     class="portfolio-grid"
                     id="motion-grid"
-                    hx-get="/api/works/motion-design"
+                    hx-get="/api/works/motion"
                     hx-trigger="load"
                     hx-target="#motion-grid"
                 >
                     <!-- Motion design works will be loaded here -->
                     <div class="loading">載入中...</div>
-
-                    <!-- Fallback static content for testing -->
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="測試作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">測試作品 1</h3>
-                            <span class="portfolio-year">2024</span>
-                        </div>
                     </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="測試作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">測試作品 2</h3>
-                            <span class="portfolio-year">2024</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="測試作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">測試作品 3</h3>
-                            <span class="portfolio-year">2023</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="測試作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">測試作品 4</h3>
-                            <span class="portfolio-year">2023</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="測試作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">測試作品 5</h3>
-                            <span class="portfolio-year">2023</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="測試作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">測試作品 6</h3>
-                            <span class="portfolio-year">2022</span>
-                        </div>
-                    </div>
-                </div>
             </section>
 
-            <!-- Graphic Design Section -->
-            <section id="graphic" class="portfolio-section animate-element">
+            <!-- Visual Design Section -->
+            <section id="visual" class="portfolio-section animate-element">
                 <h2 class="section-title animate-element">Visual Designs</h2>
                 <div
                     class="portfolio-grid"
-                    id="graphic-grid"
-                    hx-get="/api/works/graphic-design"
+                    id="visual-grid"
+                    hx-get="/api/works/visual"
                     hx-trigger="load"
-                    hx-target="#graphic-grid"
+                    hx-target="#visual-grid"
                 >
                     <!-- Graphic design works will be loaded here -->
                     <div class="loading">載入中...</div>
+                </div>
+            </section>
 
-                    <!-- Fallback static content for testing -->
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="平面設計作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">平面設計作品 1</h3>
-                            <span class="portfolio-year">2024</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="平面設計作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">平面設計作品 2</h3>
-                            <span class="portfolio-year">2024</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="平面設計作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">平面設計作品 3</h3>
-                            <span class="portfolio-year">2023</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="平面設計作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">平面設計作品 4</h3>
-                            <span class="portfolio-year">2023</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="平面設計作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">平面設計作品 5</h3>
-                            <span class="portfolio-year">2023</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="portfolio-item animate-element"
-                        style="opacity: 0; transform: translateY(30px)"
-                    >
-                        <div class="portfolio-image">
-                            <img
-                                src="/src/images/placeholder.svg"
-                                alt="平面設計作品"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="portfolio-content">
-                            <h3 class="portfolio-title">平面設計作品 6</h3>
-                            <span class="portfolio-year">2022</span>
-                        </div>
-                    </div>
+            <!-- Cinematic Film Section -->
+            <section id="cinematic" class="portfolio-section animate-element">
+                <h2 class="section-title animate-element">Cinematic Film</h2>
+                <div
+                    class="portfolio-grid"
+                    id="cinematic-grid"
+                    hx-get="/api/works/cinematic"
+                    hx-trigger="load"
+                    hx-target="#cinematic-grid"
+                >
+                    <!-- Cinematic film works will be loaded here -->
+                    <div class="loading">載入中...</div>
                 </div>
             </section>
         </main>
@@ -322,19 +154,23 @@
         <!-- Footer -->
         <footer class="footer animate-element">
             <div class="footer-content">
-                <p>&copy; 2024 Bax. All rights reserved.</p>
+                <p>&copy; 2025 Bax. All Rights Reserved.</p>
                 <div class="footer-links">
-                    <a href="#" class="footer-link">Twitter</a>
-                    <a href="#" class="footer-link">GitHub</a>
-                    <a href="#" class="footer-link">Instagram</a>
-                    <a href="#" class="footer-link">Pixiv</a>
+                    <a href="https://x.com/baxartworkz" class="footer-link">X</a>
+                    <a href="https://www.behance.net/baxartworkz" class="footer-link">Behance</a>
+                    <a href="https://www.youtube.com/@baxartworkz" class="footer-link">Youtube</a>
                 </div>
             </div>
         </footer>
 
+        <script src="src/js/motion-preferences.js"></script>
         <script src="src/js/transition-manager.js"></script>
         <script src="src/js/animations.js"></script>
         <script src="src/js/app.js"></script>
         <script src="src/js/particles.js"></script>
+        <!-- HTMX back navigation fix -->
+        <script src="src/js/htmx-back-navigation-fix.js"></script>
+        <!-- Debug script for development (comment out in production) -->
+        <script src="src/js/debug-back-navigation.js"></script>
     </body>
 </html>

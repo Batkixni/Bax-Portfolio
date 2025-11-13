@@ -1,0 +1,545 @@
+/* Photography Share Page Specific Styles */
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.breadcrumb a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: var(--text-primary);
+}
+
+.breadcrumb span {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Share Controls */
+.share-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    max-width: 1200px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.share-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.share-info .photo-count {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.share-info .folder-size {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.share-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.download-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-all-btn:hover:not(:disabled) {
+    background: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.download-all-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.download-all-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.download-all-btn.downloading {
+    background: var(--text-secondary);
+    cursor: wait;
+}
+
+.download-all-btn.downloading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.download-icon {
+    font-size: 1rem;
+}
+
+/* Share Folders Grid */
+.share-folders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.folder-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.folder-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.folder-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-primary);
+}
+
+.folder-card:hover::before {
+    transform: scaleX(1);
+}
+
+.folder-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.folder-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.folder-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.folder-date {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Photo Modal Enhancements */
+.photo-exif {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.exif-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.exif-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.exif-value {
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+.photo-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.download-single-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.download-single-btn:hover {
+    background: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+/* Download Progress Modal */
+.download-modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.download-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.download-modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.download-modal-content h3 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.download-progress {
+    background: var(--border-color);
+    border-radius: 10px;
+    height: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.download-progress .progress-bar {
+    height: 100%;
+    background: var(--accent-primary);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+#download-status {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.cancel-download-btn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-download-btn:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Back Section */
+.back-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.back-link:hover {
+    color: var(--accent-primary);
+}
+
+/* Empty and Error States */
+.empty-folders-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 2px dashed var(--border-color);
+}
+
+.empty-folders-state h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.empty-folders-state p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.empty-folders-state .help-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .share-controls {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .share-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .download-all-btn,
+    .refresh-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .share-info {
+        text-align: center;
+        width: 100%;
+    }
+
+    .share-folders-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .folder-card {
+        padding: 1rem;
+    }
+
+    .folder-name {
+        font-size: 1.2rem;
+    }
+
+    .download-modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .photo-exif {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .share-controls {
+        margin: 1rem;
+        padding: 0.75rem;
+    }
+
+    .photography-title {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+
+    .folder-card {
+        padding: 1rem;
+    }
+
+    .folder-icon {
+        font-size: 2.5rem;
+    }
+
+    .folder-name {
+        font-size: 1.1rem;
+    }
+}
+
+/* Loading States */
+.loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    border-top-color: var(--accent-primary);
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+/* Success and Error Messages */
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: 500;
+    text-align: center;
+}
+
+.message.success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #059669;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.message.info {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Hover Effects */
+.refresh-btn .refresh-icon,
+.download-all-btn .download-icon {
+    transition: transform 0.3s ease;
+}
+
+.refresh-btn:hover .refresh-icon {
+    transform: rotate(180deg);
+}
+
+.download-all-btn:hover .download-icon {
+    transform: scale(1.1);
+}
+
+/* High Resolution Displays */
+@media (min-width: 1200px) {
+    .share-folders-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2.5rem;
+    }
+}
+
+/* Dark Mode Specific Adjustments */
+@media (prefers-color-scheme: dark) {
+    .folder-card {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .folder-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .download-progress {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .share-controls,
+    .download-modal,
+    .photo-modal {
+        display: none !important;
+    }
+}
