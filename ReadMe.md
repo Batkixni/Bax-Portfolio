@@ -130,7 +130,7 @@ node generate-blog.js
 
 This project uses the following open-source packages. Their license terms and official websites are noted below:
 
-| Package Name | Official Website | License | Note |
+| Package Name | License |
 | :--- | :--- | 
 | [**GSAP** ](https://gsap.com/)| **Standard "No-Charge" License** | 
 | [**p5.js** ](https://p5js.org/ )| **GNU Lesser General Public License 2.1 (LGPL 2.1)** | 
