@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 // Initialize photo manager
 const photoManager = new PhotoManager(path.join(__dirname, "photography"));
 
-// 初始化頁面生成器
+// Initialize page generator
 const pageGenerator = new PageGenerator(
   __dirname,
   path.join(__dirname, "templates"),
@@ -93,7 +93,7 @@ app.get("/api/works/:category", async (req, res) => {
 
       const work = {
         id: path.parse(file).name,
-        title: parsed.attributes.title || "未命名作品",
+        title: parsed.attributes.title || "Untitled Work",
         description: parsed.attributes.description || "",
         image: parsed.attributes.image || "/src/images/placeholder.svg",
         category: category,
@@ -135,7 +135,7 @@ app.get("/api/works/:category", async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error("Error loading works:", error);
-    res.status(500).send('<div class="loading">載入作品時發生錯誤</div>');
+    res.status(500).send('<div class="loading">Error loading works</div>');
   }
 });
 
@@ -221,7 +221,7 @@ app.get("/api/photography/share/:folderName", async (req, res) => {
     const folderInfo = await photoShareManager.getFolderInfo(folderName);
 
     if (!folderInfo) {
-      return res.status(404).json({ error: "資料夾不存在" });
+      return res.status(404).json({ error: "Folder does not exist" });
     }
 
     res.json({
@@ -276,7 +276,7 @@ app.get("/api/work/:category/:id", async (req, res) => {
 
     const workHtml = `
             <div class="work-detail">
-                <h1>${parsed.attributes.title || "未命名作品"}</h1>
+                <h1>${parsed.attributes.title || "Untitled Work"}</h1>
                 ${parsed.attributes.image ? `<img src="${parsed.attributes.image}" alt="${parsed.attributes.title}" class="work-main-image">` : ""}
                 <div class="work-content">
                     ${html}
@@ -287,7 +287,7 @@ app.get("/api/work/:category/:id", async (req, res) => {
     res.send(workHtml);
   } catch (error) {
     console.error("Error loading work detail:", error);
-    res.status(500).send("<p>載入作品詳情時發生錯誤</p>");
+    res.status(500).send("<p>Error loading work details</p>");
   }
 });
 
@@ -314,7 +314,7 @@ app.get("/api/work/:path", async (req, res) => {
 
     const workHtml = `
             <div class="work-detail">
-                <h1>${parsed.attributes.title || "未命名作品"}</h1>
+                <h1>${parsed.attributes.title || "Untitled Work"}</h1>
                 ${parsed.attributes.image ? `<img src="${parsed.attributes.image}" alt="${parsed.attributes.title}" class="work-main-image">` : ""}
                 <div class="work-content">
                     ${html}
@@ -325,7 +325,7 @@ app.get("/api/work/:path", async (req, res) => {
     res.send(workHtml);
   } catch (error) {
     console.error("Error loading work detail:", error);
-    res.status(500).send("<p>載入作品詳情時發生錯誤</p>");
+    res.status(500).send("<p>Error loading work details</p>");
   }
 });
 
@@ -368,24 +368,24 @@ app.use("*", (req, res) => {
   }
 });
 
-// 伺服器啟動時重新生成所有頁面
+// Regenerate all pages on server startup
 async function startServer() {
   try {
-    console.log("正在重新生成所有作品頁面...");
+    console.log("Regenerating all work pages...");
     await pageGenerator.generateAllPages();
-    console.log("作品頁面生成完成！");
+    console.log("Work pages generated!");
 
-    console.log("正在初始化照片管理系統...");
+    console.log("Initializing photo management system...");
     await photoManager.init();
     await photoManager.scanAndUpdatePhotos();
-    console.log("照片管理系統初始化完成！");
+    console.log("Photo management system initialized!");
 
     app.listen(PORT, () => {
-      console.log(`伺服器運行在 http://localhost:${PORT}`);
-      console.log("按 Ctrl+C 停止伺服器");
+      console.log(`Server running at http://localhost:${PORT}`);
+      console.log("Press Ctrl+C to stop the server");
     });
   } catch (error) {
-    console.error("伺服器啟動失敗:", error);
+    console.error("Failed to start the server:", error);
     process.exit(1);
   }
 }
