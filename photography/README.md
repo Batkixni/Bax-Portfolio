@@ -68,32 +68,6 @@ Edit the `photo-info.json` file to add detailed information for each image:
   * Tagging system
   * High-resolution image preview
 
-### Animation Effects
-
-  * Page loading animation
-  * Scroll-triggered animations
-  * Modal entry/exit animations
-
-### Responsive Design
-
-  * Fully adapted for desktop, tablet, and mobile
-  * Touch-friendly user interface
-
-## Automatic Functions
-
-The system will automatically:
-
-1.  Scan all image files in the `images` folder.
-2.  Read the configuration information from `photo-info.json`.
-3.  Generate the responsive image grid.
-4.  Provide default values for images without configured information.
-
-## Important Notes
-
-1.  The image filename must **exactly match** the key in `photo-info.json`.
-2.  It is recommended that image file size does not exceed 5MB to ensure loading speed.
-3.  It is recommended that image dimensions be at least 800x600 pixels for optimal display.
-4.  Titles, descriptions, and tags support Traditional Chinese.
 
 ## Example Configuration
 
