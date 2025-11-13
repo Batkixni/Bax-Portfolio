@@ -116,7 +116,7 @@ node generate-blog.js
 
 ## 🚧 To-Do / Pending Updates
 
-  * **Code Localization:** The code comments and internal variable names still largely use Chinese descriptions. They need to be fully translated into English for better international readability and collaboration.
+  * **Code Localization:** The code comments and internal variable names still largely use Chinese descriptions. 
 
 -----
 
