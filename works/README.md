@@ -41,5 +41,3 @@ For Example:
 %
 
 This will let the backend know you want to create a 2X1 grid.
-
-```
