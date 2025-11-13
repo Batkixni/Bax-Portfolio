@@ -56,7 +56,7 @@ class PhotoManager {
 
         // Check if photo already exists in JSON
         if (!photoData.photos[filename]) {
-          console.log(`發現新照片: ${filename}`);
+          console.log(`Find New Images: ${filename}`);
 
           // Create new entry for this photo
           const photoInfo = await this.createPhotoEntry(filePath, filename);
@@ -84,7 +84,7 @@ class PhotoManager {
       const existingPhotos = Object.keys(photoData.photos || {});
       for (const filename of existingPhotos) {
         if (!imageFiles.includes(filename)) {
-          console.log(`移除已刪除的照片: ${filename}`);
+          console.log(`Delete Not Exist Images: ${filename}`);
           delete photoData.photos[filename];
           hasChanges = true;
         }
@@ -99,14 +99,14 @@ class PhotoManager {
         };
 
         await fs.writeJson(this.infoPath, photoData, { spaces: 2 });
-        console.log(`已更新照片資訊，共 ${imageFiles.length} 張照片`);
+        console.log(`Updated ${imageFiles.length} image informations`);
       } else {
-        console.log("照片資訊已是最新狀態");
+        console.log("All image data is up to date");
       }
 
       return photoData;
     } catch (error) {
-      console.error("掃描照片時發生錯誤:", error);
+      console.error("Error when scan the image:", error);
       throw error;
     }
   }
@@ -116,7 +116,7 @@ class PhotoManager {
       const data = await fs.readJson(this.infoPath);
       return data;
     } catch (error) {
-      console.log("無法讀取照片資訊，創建新的資料");
+      console.log("Can not read the image info, creating new now");
       return {
         photos: {},
         _metadata: {
@@ -137,7 +137,7 @@ class PhotoManager {
         ),
       );
     } catch (error) {
-      console.error("讀取圖片目錄失敗:", error);
+      console.error("Failed to read the image catalog:", error);
       return [];
     }
   }
@@ -265,7 +265,7 @@ class PhotoManager {
       return formattedExif;
     } catch (error) {
       console.warn(
-        `無法讀取 ${path.basename(filePath)} 的 EXIF 資訊:`,
+        `Can not read file ${path.basename(filePath)} 's information:`,
         error.message,
       );
       return null;
@@ -277,7 +277,7 @@ class PhotoManager {
       const photoData = await this.loadPhotoData();
 
       if (!photoData.photos[filename]) {
-        throw new Error(`照片 ${filename} 不存在`);
+        throw new Error(`Image ${filename} is not exist`);
       }
 
       // Merge updates
@@ -292,10 +292,10 @@ class PhotoManager {
 
       await fs.writeJson(this.infoPath, photoData, { spaces: 2 });
 
-      console.log(`已更新照片資訊: ${filename}`);
+      console.log(`Updated: ${filename}`);
       return photoData.photos[filename];
     } catch (error) {
-      console.error("更新照片資訊時發生錯誤:", error);
+      console.error("Error when updating the image information:", error);
       throw error;
     }
   }
@@ -312,12 +312,12 @@ class PhotoManager {
 
   // Method to be called periodically or on server start
   async autoUpdate() {
-    console.log("開始自動更新照片資訊...");
+    console.log("Start to auto updating image info...");
     try {
       await this.scanAndUpdatePhotos();
-      console.log("照片資訊自動更新完成");
+      console.log("Update complete");
     } catch (error) {
-      console.error("自動更新照片資訊失敗:", error);
+      console.error("Update failed:", error);
     }
   }
 
@@ -341,17 +341,17 @@ class PhotoManager {
             filename.toLowerCase().endsWith(ext),
           )
         ) {
-          console.log(`檢測到新照片: ${filename}`);
+          console.log(`Scan the new image: ${filename}`);
           this.autoUpdate();
         }
       })
       .on("unlink", (filePath) => {
         const filename = path.basename(filePath);
-        console.log(`檢測到照片被刪除: ${filename}`);
+        console.log(`Scanned the image got delete: ${filename}`);
         this.autoUpdate();
       });
 
-    console.log(`開始監控照片目錄: ${this.imagesDir}`);
+    console.log(`Start to detect the image catalogs: ${this.imagesDir}`);
     return watcher;
   }
 }
