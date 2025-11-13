@@ -1,100 +1,106 @@
-# 攝影作品功能說明
+# Photography Portfolio Feature Guide
 
-這個攝影作品頁面提供了一個完整的攝影作品展示系統，包含圖片網格展示和詳細資訊彈窗。
+This photography portfolio page provides a complete display system for photographic works, including an image grid display and a detailed information modal.
 
-## 文件結構
+## File Structure
 
 ```
 photography/
-├── images/              # 存放攝影作品的圖片文件
+├── images/             # Stores the image files of the photography works
 │   ├── example.jpg
 │   ├── sunset.jpg
 │   └── portrait.jpg
-├── photo-info.json      # 圖片的詳細資訊配置文件
-└── README.md           # 此說明文件
+├── photo-info.json     # Configuration file for detailed image information
+└── README.md           # This documentation file
 ```
 
-## 使用方式
+## Usage
 
-### 1. 添加新的攝影作品
+### 1\. Adding a New Photography Work
 
-1. 將圖片文件放入 `photography/images/` 資料夾中
-2. 在 `photo-info.json` 中添加對應的圖片資訊
+1.  Place the image file into the `photography/images/` folder.
+2.  Add the corresponding image information to `photo-info.json`.
 
-### 2. 配置圖片資訊
+### 2\. Configuring Image Information
 
-編輯 `photo-info.json` 文件，為每張圖片添加詳細資訊：
+Edit the `photo-info.json` file to add detailed information for each image:
 
 ```json
 {
   "photos": {
     "your-photo.jpg": {
-      "title": "照片標題",
-      "description": "照片描述",
+      "title": "Photo Title",
+      "description": "Photo Description",
       "exif": {
-        "camera": "相機型號",
-        "lens": "鏡頭型號", 
-        "focal_length": "焦距",
-        "aperture": "光圈值",
-        "shutter_speed": "快門速度",
-        "iso": "ISO值",
-        "date_taken": "拍攝日期 (YYYY-MM-DD)"
+        "camera": "Camera Model",
+        "lens": "Lens Model",
+        "focal_length": "Focal Length",
+        "aperture": "Aperture Value",
+        "shutter_speed": "Shutter Speed",
+        "iso": "ISO Value",
+        "date_taken": "Date Taken (YYYY-MM-DD)"
       },
-      "tags": ["標籤1", "標籤2"]
+      "tags": ["Tag 1", "Tag 2"]
     }
   }
 }
 ```
 
-### 3. 支援的圖片格式
+### 3\. Supported Image Formats
 
-- JPG/JPEG
-- PNG
-- WebP
-- GIF
+  * JPG/JPEG
+  * PNG
+  * WebP
+  * GIF
 
-## 功能特色
+## Key Features
 
-### 圖片網格展示
-- 響應式網格佈局
-- 懸停效果動畫
-- 圖片延遲載入
+### Image Grid Display
 
-### 詳細資訊彈窗
-- 點擊圖片查看詳細資訊
-- EXIF 資訊展示
-- 標籤系統
-- 高解析度圖片預覽
+  * Responsive grid layout
+  * Hover effect animation
+  * Image lazy loading
 
-### 動畫效果
-- 頁面載入動畫
-- 滾動觸發動畫
-- 彈窗進入/退出動畫
+### Detailed Information Modal
 
-### 響應式設計
-- 桌面端、平板、手機完全適配
-- 觸控友好的操作界面
+  * Click on an image to view detailed information
+  * EXIF data display
+  * Tagging system
+  * High-resolution image preview
 
-## 自動功能
+### Animation Effects
 
-系統會自動：
-1. 掃描 `images` 資料夾中的所有圖片文件
-2. 讀取 `photo-info.json` 中的配置資訊
-3. 生成響應式圖片網格
-4. 為沒有配置資訊的圖片提供預設值
+  * Page loading animation
+  * Scroll-triggered animations
+  * Modal entry/exit animations
 
-## 注意事項
+### Responsive Design
 
-1. 圖片文件名需要與 `photo-info.json` 中的鍵值完全匹配
-2. 建議圖片文件大小不超過 5MB 以確保載入速度
-3. 建議圖片尺寸至少 800x600 像素以獲得最佳顯示效果
-4. 支援繁體中文的標題、描述和標籤
+  * Fully adapted for desktop, tablet, and mobile
+  * Touch-friendly user interface
 
-## 範例配置
+## Automatic Functions
 
-參考 `photo-info.json` 中的範例配置：
-- `example.jpg` - 基本配置範例
-- `sunset.jpg` - 風景攝影範例  
-- `portrait.jpg` - 人像攝影範例
+The system will automatically:
 
-每次重新啟動服務器或重新整理頁面時，系統會自動載入最新的圖片和配置資訊。
+1.  Scan all image files in the `images` folder.
+2.  Read the configuration information from `photo-info.json`.
+3.  Generate the responsive image grid.
+4.  Provide default values for images without configured information.
+
+## Important Notes
+
+1.  The image filename must **exactly match** the key in `photo-info.json`.
+2.  It is recommended that image file size does not exceed 5MB to ensure loading speed.
+3.  It is recommended that image dimensions be at least 800x600 pixels for optimal display.
+4.  Titles, descriptions, and tags support Traditional Chinese.
+
+## Example Configuration
+
+Refer to the example configurations in `photo-info.json`:
+
+  * `example.jpg` - Basic configuration example
+  * `sunset.jpg` - Landscape photography example
+  * `portrait.jpg` - Portrait photography example
+
+The system will automatically load the latest images and configuration information every time the server is restarted or the page is refreshed.
