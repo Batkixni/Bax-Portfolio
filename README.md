@@ -4,7 +4,7 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 
 ![Preview](https://files.catbox.moe/opt3u1.jpg)
 
-[中文版](https://github.com/Batkixni/Bax-Portfolio/blob/main/ReadMe-Zh.md)
+[中文版](https://github.com/Batkixni/Bax-Portfolio/blob/main/README-zh.md)
 
 ## 🌠 Core Key Features
 
@@ -111,12 +111,6 @@ node generate-blog.js
   * Express.js - Web Framework
   * Marked - Markdown Parser
   * Front-Matter - Metadata Processing
-
------
-
-## 🚧 To-Do / Pending Updates
-
-  * **Code Localization:** The code comments and internal variable names still largely use Chinese descriptions. 
 
 -----
 

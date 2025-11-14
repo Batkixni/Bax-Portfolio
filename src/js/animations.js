@@ -40,14 +40,14 @@ class LoadingAnimation {
   }
 
   checkTransitionManager() {
-    // 如果是瀏覽器回退，跳過載入動畫
+    // If browser back navigation, skip loading animation
     if (this.isBackNavigation) {
       this.shouldSkipLoading = true;
       console.log("Loading animation: Skipping for back navigation");
       return;
     }
 
-    // 檢查全局狀態
+    // Check global state
     if (
       window.transitionManagerState &&
       window.transitionManagerState.shouldSkipLoading
@@ -57,7 +57,7 @@ class LoadingAnimation {
         "Loading animation: Skipping based on transition manager state",
       );
     }
-    // 檢查是否有轉場管理器，並且是否應該跳過載入動畫
+    // Check if transition manager exists and should skip loading animation
     else if (
       window.transitionManager &&
       window.transitionManager.shouldSkipLoadingAnimation()
@@ -76,7 +76,7 @@ class LoadingAnimation {
     this.initialized = true;
 
     if (this.shouldSkipLoading) {
-      // 如果應該跳過載入動畫，立即隱藏載入畫面並顯示內容
+      // If should skip loading animation, immediately hide loading screen and show content
       this.skipLoadingAnimation();
       this.immediateShow();
       return;
@@ -194,14 +194,14 @@ class LoadingAnimation {
   immediateShow() {
     console.log("Immediately showing all content for back navigation");
 
-    // 隱藏載入畫面
+    // Hide loading screen
     if (this.loadingScreen) {
       this.loadingScreen.style.display = "none";
       this.loadingScreen.style.opacity = "0";
       this.loadingScreen.style.visibility = "hidden";
     }
 
-    // 立即顯示所有動畫元素
+    // Immediately show all animation elements
     const animateElements = document.querySelectorAll(".animate-element");
     animateElements.forEach((element) => {
       element.style.opacity = "1";
@@ -209,18 +209,18 @@ class LoadingAnimation {
       element.classList.add("animated");
     });
 
-    // 確保頁面主體可見
+    // Ensure page body is visible
     document.body.style.opacity = "1";
     document.body.classList.remove("page-transitioning", "transitioning-out");
 
-    // 確保導航欄可見
+    // Ensure navigation bar is visible
     const nav = document.querySelector(".nav");
     if (nav) {
       nav.style.opacity = "1";
       nav.style.transform = "translateX(-50%) translateY(0)";
     }
 
-    // 確保主要內容區域可見
+    // Ensure main content areas are visible
     const mainElements = document.querySelectorAll(
       "main, .hero, .portfolio-section",
     );
@@ -394,7 +394,7 @@ class WorkPageAnimations {
   }
 
   setupWorkPageScrollAnimations() {
-    // 檢查 ScrollTrigger 是否已經註冊
+    // Check if ScrollTrigger is already registered
     if (!window.gsapScrollTriggerRegistered) {
       gsap.registerPlugin(ScrollTrigger);
       window.gsapScrollTriggerRegistered = true;
@@ -470,7 +470,7 @@ class EntranceAnimations {
     this.initialized = true;
     console.log("Starting entrance animations");
 
-    // 如果是瀏覽器回退，重置動畫狀態
+    // If browser back navigation, reset animation states
     if (this.isBackNavigation) {
       this.resetAnimationStates();
     }
@@ -481,30 +481,30 @@ class EntranceAnimations {
   resetAnimationStates() {
     console.log("Resetting animation states for back navigation");
 
-    // 殺死所有正在進行的動畫
+    // Kill all ongoing animations
     gsap.killTweensOf("*");
 
-    // 立即重置所有動畫元素為可見狀態
+    // Immediately reset all animation elements to visible state
     const animateElements = document.querySelectorAll(".animate-element");
     animateElements.forEach((element) => {
-      // 使用內聯樣式立即顯示元素
+      // Use inline styles to immediately show elements
       element.style.opacity = "1";
       element.style.transform = "translateY(0)";
       element.classList.add("animated");
     });
 
-    // 確保導航欄可見
+    // Ensure navigation bar is visible
     const nav = document.querySelector(".nav");
     if (nav) {
       nav.style.opacity = "1";
       nav.style.transform = "translateX(-50%) translateY(0)";
     }
 
-    // 確保頁面主體可見
+    // Ensure page body is visible
     document.body.style.opacity = "1";
     document.body.classList.remove("page-transitioning", "transitioning-out");
 
-    // 立即隱藏載入畫面
+    // Immediately hide loading screen
     const loadingScreen = document.getElementById("loading-screen");
     if (loadingScreen) {
       loadingScreen.style.display = "none";
@@ -512,7 +512,7 @@ class EntranceAnimations {
       loadingScreen.style.visibility = "hidden";
     }
 
-    // 確保主要內容區域可見
+    // Ensure main content areas are visible
     const mainElements = document.querySelectorAll(
       "main, .hero, .portfolio-section",
     );
@@ -521,7 +521,7 @@ class EntranceAnimations {
       element.style.transform = "translateY(0)";
     });
 
-    // 重置任何 GSAP 設置的屬性
+    // Reset any GSAP set properties
     gsap.set(".animate-element", { clearProps: "all" });
     gsap.set("body", { clearProps: "all" });
     gsap.set("main, .hero, .portfolio-section", { clearProps: "all" });
@@ -650,7 +650,7 @@ class EntranceAnimations {
   }
 
   setupScrollAnimations() {
-    // 檢查 ScrollTrigger 是否已經註冊
+    // Check if ScrollTrigger is already registered
     if (!window.gsapScrollTriggerRegistered) {
       gsap.registerPlugin(ScrollTrigger);
       window.gsapScrollTriggerRegistered = true;
@@ -808,7 +808,7 @@ class ParticleIntegration {
       return;
     }
 
-    // 如果是瀏覽器回退，立即啟動粒子
+    // If browser back navigation, immediately start particles
     if (this.isBackNavigation) {
       this.isLoadingComplete = true;
       this.startParticles();
@@ -842,7 +842,7 @@ class ParticleIntegration {
   }
 }
 
-// 檢查是否為瀏覽器回退
+// Check if browser back navigation
 function isBackNavigation() {
   return (
     (window.performance &&
@@ -863,7 +863,7 @@ document.addEventListener(
   function () {
     const isBack = isBackNavigation();
 
-    // 防止重複初始化，除非是瀏覽器回退
+    // Prevent duplicate initialization unless browser back navigation
     if (window.animationsInitialized && !isBack) {
       console.log("Animations already initialized, skipping");
       return;
@@ -876,7 +876,7 @@ document.addEventListener(
     window.animationsInitialized = true;
     console.log("DOM loaded, starting animations");
 
-    // 等待轉場管理器初始化完成
+    // Wait for transition manager initialization to complete
     const initializeAnimations = () => {
       // Start loading animation
       const loading = new LoadingAnimation();
@@ -889,11 +889,11 @@ document.addEventListener(
       setupThemeAnimations();
     };
 
-    // 如果轉場管理器已經存在，立即初始化
+    // If transition manager already exists, initialize immediately
     if (window.transitionManager) {
       initializeAnimations();
     } else {
-      // 否則等待轉場管理器載入
+      // Otherwise wait for transition manager to load
       const waitForTransitionManager = setInterval(() => {
         if (window.transitionManager) {
           clearInterval(waitForTransitionManager);
@@ -901,7 +901,7 @@ document.addEventListener(
         }
       }, 10);
 
-      // 設置超時，避免無限等待
+      // Set timeout to avoid infinite waiting
       setTimeout(() => {
         clearInterval(waitForTransitionManager);
         if (!window.transitionManager) {

@@ -1,4 +1,4 @@
-// 簡化版本 - 使用CSS類控制cursor效果
+// Simplified version - use CSS classes to control cursor effects
 console.log("App.js loaded");
 
 // Browser compatibility checks
@@ -7,7 +7,7 @@ const supportsModernScrolling =
 // const supportsSmoothScroll =
 //   CSS.supports && CSS.supports("scroll-behavior", "smooth");
 
-// 全局變量
+// Global variables
 let cursor = null;
 let cursorFollower = null;
 let mouseX = 0;
@@ -21,7 +21,7 @@ let followerY = 0;
 // let scrollMomentum = 0;
 // let momentumFrame = null;
 
-// 平滑跟隨動畫函數
+// Smooth follow animation function
 function animateFollower() {
   // Check motion preferences before animating
   const shouldAnimate = window.motionPrefs
@@ -35,7 +35,7 @@ function animateFollower() {
   const diffX = mouseX - followerX;
   const diffY = mouseY - followerY;
 
-  followerX += diffX * 0.1; // 調整跟隨速度
+  followerX += diffX * 0.1; // Adjust follow speed
   followerY += diffY * 0.1;
 
   if (cursorFollower) {
@@ -46,7 +46,7 @@ function animateFollower() {
   requestAnimationFrame(animateFollower);
 }
 
-// 檢測是否為瀏覽器回退
+// Detect if browser back navigation
 function isBackNavigation() {
   return (
     (window.performance &&

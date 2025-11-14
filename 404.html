@@ -3,19 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>404 - 頁面未找到 | Bax</title>
+        <title>404 - Page Not Found | Bax</title>
         <meta
             name="description"
-            content="抱歉，您要尋找的頁面不存在。請返回首頁瀏覽 Bax 的創意作品集。"
+            content="Sorry, the page you are looking for does not exist. Please return to the homepage to browse Bax's creative portfolio."
         />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://bax-portfolio.com/404" />
-        <meta property="og:title" content="404 - 頁面未找到 | Bax Portfolio" />
+        <meta
+            property="og:title"
+            content="404 - Page Not Found | Bax Portfolio"
+        />
         <meta
             property="og:description"
-            content="抱歉，您要尋找的頁面不存在。請返回首頁瀏覽 Bax 的創意作品集。"
+            content="Sorry, the page you are looking for does not exist. Please return to the homepage to browse Bax's creative portfolio."
         />
         <meta
             property="og:image"
@@ -31,11 +34,11 @@
         <meta property="twitter:url" content="https://bax-portfolio.com/404" />
         <meta
             property="twitter:title"
-            content="404 - 頁面未找到 | Bax Portfolio"
+            content="404 - Page Not Found | Bax Portfolio"
         />
         <meta
             property="twitter:description"
-            content="抱歉，您要尋找的頁面不存在。請返回首頁瀏覽 Bax 的創意作品集。"
+            content="Sorry, the page you are looking for does not exist. Please return to the homepage to browse Bax's creative portfolio."
         />
         <meta
             property="twitter:image"
@@ -55,19 +58,19 @@
         />
     </head>
     <body class="loading" style="overflow: hidden; height: 100vh">
-        <!-- 404 背景畫布 -->
+        <!-- 404 Background Canvas -->
         <div id="error-canvas-container"></div>
 
         <!-- Custom Cursor -->
         <div class="cursor"></div>
         <div class="cursor-follower"></div>
 
-        <!-- 數位時鐘 -->
+        <!-- Digital Clock -->
         <div class="digital-clock" id="digital-clock">
             <span id="clock-time">00:00:00</span>
         </div>
 
-        <!-- 404 錯誤內容 -->
+        <!-- 404 Error Content -->
         <div class="error-container">
             <div class="floating-particles" id="floating-particles"></div>
 
@@ -77,13 +80,13 @@
 
             <p class="error-message">Are you lost in the internet?<br /></p>
 
-            <!-- 固定回到首頁按鈕 -->
+            <!-- Fixed Home Button -->
             <div class="home-button-fixed">
                 <a href="/" class="btn-home-fixed"> <span>←</span> HOME </a>
             </div>
         </div>
 
-        <!-- 狀態欄 -->
+        <!-- Status Bar -->
         <div class="status-bar">
             <div>
                 ERROR_404 | CONNECTION_LOST |
@@ -91,11 +94,11 @@
             </div>
         </div>
 
-        <!-- Matrix雨效果 -->
+        <!-- Matrix Rain Effect -->
         <div class="matrix-rain" id="matrix-rain"></div>
 
         <script>
-            // P5.js 404 背景動畫
+            // P5.js 404 Background Animation
             let particles = [];
             let grid = [];
             let flowField = [];
@@ -108,40 +111,40 @@
                 let canvas = createCanvas(windowWidth, windowHeight);
                 canvas.parent("error-canvas-container");
 
-                // 計算網格
+                // Calculate grid
                 cols = Math.floor(width / 30);
                 rows = Math.floor(height / 30);
 
-                // 初始化粒子系統
+                // Initialize particle system
                 for (let i = 0; i < 80; i++) {
                     particles.push(new ErrorParticle());
                 }
 
-                // 初始化數位線條
+                // Initialize digital lines
                 for (let i = 0; i < 10; i++) {
                     digitalLines.push(new DigitalLine());
                 }
 
-                // 初始化流場
+                // Initialize flow field
                 flowField = new Array(cols * rows);
             }
 
             function draw() {
                 background(getBackgroundColor());
 
-                // 更新流場
+                // Update flow field
                 updateFlowField();
 
-                // 繪製動態網格
+                // Draw dynamic grid
                 drawGrid();
 
-                // 繪製數位線條
+                // Draw digital lines
                 for (let line of digitalLines) {
                     line.update();
                     line.display();
                 }
 
-                // 更新和繪製粒子
+                // Update and draw particles
                 for (let i = particles.length - 1; i >= 0; i--) {
                     particles[i].update();
                     particles[i].display();
@@ -152,10 +155,10 @@
                     }
                 }
 
-                // 繪製數字干擾效果
+                // Draw digital glitch effect
                 drawDigitalGlitch();
 
-                // 繪製連接線
+                // Draw connections
                 drawConnections();
 
                 time += 0.008;
@@ -280,7 +283,7 @@
                 }
 
                 update() {
-                    // 跟隨流場
+                    // Follow flow field
                     let x = Math.floor(this.x / 30);
                     let y = Math.floor(this.y / 30);
                     let index = x + y * cols;
@@ -291,7 +294,7 @@
                         this.acc.add(force);
                     }
 
-                    // 添加隨機擾動
+                    // Add random disturbance
                     if (random() < 0.1) {
                         let randomForce = p5.Vector.random2D();
                         randomForce.mult(0.2);
@@ -304,7 +307,7 @@
                     this.y += this.vel.y;
                     this.acc.mult(0);
 
-                    // 更新軌跡
+                    // Update trail
                     this.trail.push({ x: this.x, y: this.y });
                     if (this.trail.length > this.maxTrail) {
                         this.trail.shift();
@@ -312,7 +315,7 @@
 
                     this.life--;
 
-                    // 邊界檢查 - 包裹
+                    // Boundary check - wrap around
                     if (this.x < 0) this.x = width;
                     if (this.x > width) this.x = 0;
                     if (this.y < 0) this.y = height;
@@ -322,7 +325,7 @@
                 display() {
                     let alpha = map(this.life, 0, this.maxLife, 0, 255);
 
-                    // 繪製軌跡
+                    // Draw trail
                     for (let i = 0; i < this.trail.length - 1; i++) {
                         let trailAlpha = map(
                             i,
@@ -346,14 +349,14 @@
                         }
                     }
 
-                    // 繪製主體
+                    // Draw main body
                     let col = getTextColor();
                     col.setAlpha(alpha * 0.6);
                     fill(col);
                     noStroke();
                     circle(this.x, this.y, this.size);
 
-                    // 光暈效果
+                    // Halo effect
                     if (random() < 0.1) {
                         col.setAlpha(alpha * 0.2);
                         fill(col);
@@ -418,7 +421,7 @@
                 flowField = new Array(cols * rows);
             }
 
-            // 主題感知顏色函數
+            // Theme-aware color functions
             function getBackgroundColor() {
                 const isLight =
                     document.documentElement.getAttribute("data-theme") ===
@@ -433,7 +436,7 @@
                 return isLight ? color(0, 0, 0) : color(255, 255, 255);
             }
 
-            // 光標系統變量
+            // Cursor system variables
             let cursor = null;
             let cursorFollower = null;
             let mouseX = 0;
@@ -441,7 +444,7 @@
             let followerX = 0;
             let followerY = 0;
 
-            // 光標跟隨動畫
+            // Cursor follow animation
             function animateFollower() {
                 const diffX = mouseX - followerX;
                 const diffY = mouseY - followerY;
@@ -457,31 +460,31 @@
                 requestAnimationFrame(animateFollower);
             }
 
-            // DOM 初始化
+            // DOM initialization
             document.addEventListener("DOMContentLoaded", function () {
-                // 移除loading狀態
+                // Remove loading state
                 setTimeout(() => {
                     document.body.classList.remove("loading");
                     document.body.classList.add("loaded");
                 }, 500);
 
-                // 初始化自定義光標
+                // Initialize custom cursor
                 initCustomCursor();
 
-                // 創建浮動粒子
+                // Create floating particles
                 createFloatingParticles();
 
-                // 創建Matrix雨效果
+                // Create Matrix rain effect
                 createMatrixRain();
 
-                // 初始化數位時鐘
+                // Initialize digital clock
                 updateDigitalClock();
                 setInterval(updateDigitalClock, 1000);
 
-                // 更新訪客計數
+                // Update visitor count
                 updateVisitorCount();
 
-                // GSAP 入場動畫
+                // GSAP entrance animation
                 gsap.timeline({ delay: 0.5 })
                     .from(".error-number", {
                         duration: 1.2,
@@ -530,8 +533,8 @@
                         "-=0.4",
                     );
 
-                // 移除404數字的持續動畫
-                // 只保留靜態狀態
+                // Remove continuous animation of 404 number
+                // Keep only static state
             });
 
             function initCustomCursor() {
@@ -539,31 +542,31 @@
                 cursorFollower = document.querySelector(".cursor-follower");
 
                 if (cursor && cursorFollower) {
-                    // 啟動跟隨動畫
+                    // Start follow animation
                     animateFollower();
 
-                    // 滑鼠移動事件
+                    // Mouse move event
                     document.addEventListener("mousemove", function (e) {
                         if (window.innerWidth > 768) {
                             mouseX = e.clientX;
                             mouseY = e.clientY;
 
-                            // 主cursor即時跟隨
+                            // Main cursor real-time follow
                             cursor.style.left = e.clientX - 10 + "px";
                             cursor.style.top = e.clientY - 10 + "px";
 
-                            // 根據懸停元素改變cursor樣式
+                            // Change cursor style based on hovered element
                             if (e.target.closest(".btn-404")) {
                                 cursor.className = "cursor hover-button";
                                 cursorFollower.className =
                                     "cursor-follower hover-button";
-                                // 添加按鈕懸停粒子效果
+                                // Add button hover particle effect
                                 createCursorParticles(e.clientX, e.clientY);
                             } else if (e.target.closest(".error-number")) {
                                 cursor.className = "cursor hover-item";
                                 cursorFollower.className =
                                     "cursor-follower hover-item";
-                                // 移除發光效果
+                                // Remove glow effect
                             } else if (
                                 e.target.closest(".digital-clock, .status-bar")
                             ) {
@@ -576,7 +579,7 @@
                                 cursor.className = "cursor hover-item";
                                 cursorFollower.className =
                                     "cursor-follower hover-item";
-                                // 粒子區域特殊效果
+                                // Special particle area effect
                                 createRippleEffect(e.clientX, e.clientY);
                             } else {
                                 cursor.className = "cursor";
@@ -585,19 +588,19 @@
                         }
                     });
 
-                    // 滑鼠離開窗口時隱藏光標
+                    // Hide cursor when mouse leaves window
                     document.addEventListener("mouseleave", function () {
                         cursor.style.opacity = "0";
                         cursorFollower.style.opacity = "0";
                     });
 
-                    // 滑鼠進入窗口時顯示光標
+                    // Show cursor when mouse enters window
                     document.addEventListener("mouseenter", function () {
                         cursor.style.opacity = "1";
                         cursorFollower.style.opacity = "1";
                     });
 
-                    // 在小屏幕上隱藏自定義光標
+                    // Hide custom cursor on small screens
                     function handleResize() {
                         if (window.innerWidth <= 768) {
                             cursor.style.display = "none";
@@ -611,11 +614,11 @@
                     }
 
                     window.addEventListener("resize", handleResize);
-                    handleResize(); // 初始檢查
+                    handleResize(); // Initial check
                 }
             }
 
-            // 光標粒子效果
+            // Cursor particle effects
             function createCursorParticles(x, y) {
                 for (let i = 0; i < 6; i++) {
                     const particle = document.createElement("div");
@@ -649,9 +652,9 @@
                 }
             }
 
-            // 移除發光效果函數
+            // Remove glow effect function
 
-            // 漣漪效果
+            // Ripple effect
             function createRippleEffect(x, y) {
                 const ripple = document.createElement("div");
                 ripple.style.position = "fixed";
@@ -733,7 +736,7 @@
                     `VISITOR_${count.toString().padStart(3, "0")}`;
             }
 
-            // 鍵盤事件
+            // Keyboard events
             document.addEventListener("keydown", function (e) {
                 if (e.key === "Escape" || e.key === "Enter") {
                     gsap.to(".error-container", {
@@ -748,7 +751,7 @@
                 }
             });
 
-            // 輕微的滑鼠移動視差效果（減少動畫強度）
+            // Subtle mouse movement parallax effect (reduced animation intensity)
             document.addEventListener("mousemove", function (e) {
                 const x = (e.clientX / window.innerWidth) * 2 - 1;
                 const y = (e.clientY / window.innerHeight) * 2 - 1;
@@ -768,9 +771,9 @@
                 });
             });
 
-            // 增強點擊效果
+            // Enhanced click effects
             document.addEventListener("click", function (e) {
-                // 創建多層點擊波紋效果
+                // Create multi-layer click ripple effect
                 for (let i = 0; i < 3; i++) {
                     setTimeout(() => {
                         const ripple = document.createElement("div");
@@ -800,7 +803,7 @@
                     }, i * 100);
                 }
 
-                // 光標震動效果
+                // Cursor shake effect
                 if (cursor && cursorFollower) {
                     gsap.to(cursor, {
                         duration: 0.1,
@@ -812,11 +815,11 @@
                     });
                 }
 
-                // 創建點擊粒子爆炸
+                // Create click particle explosion
                 createClickExplosion(e.clientX, e.clientY);
             });
 
-            // 點擊爆炸效果
+            // Click explosion effect
             function createClickExplosion(x, y) {
                 for (let i = 0; i < 12; i++) {
                     const particle = document.createElement("div");

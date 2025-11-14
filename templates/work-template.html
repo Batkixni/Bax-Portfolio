@@ -122,7 +122,7 @@
             <button
                 class="theme-toggle"
                 id="theme-toggle"
-                aria-label="切換主題"
+                aria-label="Toggle theme"
             >
                 <span class="theme-icon">🌙</span>
             </button>
@@ -216,7 +216,7 @@
                     player.addEventListener("can-play", () => {
                         console.log("Video player ready:", player.id);
 
-                        // 調試畫質選項
+                        // Debug quality options
                         setTimeout(() => {
                             const qualities = player.qualities;
                             console.log(
@@ -236,12 +236,12 @@
                         }, 2000);
                     });
 
-                    // 監聽provider變化
+                    // Listen for provider changes
                     player.addEventListener("provider-change", (event) => {
                         console.log("Provider changed:", event.detail.provider);
                     });
 
-                    // 監聽畫質變化
+                    // Listen for quality changes
                     player.addEventListener("qualities-change", (event) => {
                         console.log("Qualities changed:", event.detail);
                     });
