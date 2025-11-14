@@ -5,6 +5,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Documentation (keep these files)
+# DEVELOPMENT_GUIDE.md
+# PARCEL_MIGRATION_SUMMARY.md
+
 # Parcel build system
 dist/
 .cache/

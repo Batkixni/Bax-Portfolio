@@ -9,31 +9,35 @@ const PageGenerator = require("./utils/page-generator");
 const PhotoManager = require("./utils/photo-manager");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+const isDevelopment = process.env.NODE_ENV !== "production";
 
-// Enable gzip compression
-app.use(
-  compression({
-    level: 6,
-    threshold: 1024,
-  }),
-);
+// Enable gzip compression (only in production)
+if (!isDevelopment) {
+  app.use(
+    compression({
+      level: 6,
+      threshold: 1024,
+    }),
+  );
 
-// Serve Parcel built static files with compression and caching
-app.use(
-  expressStaticGzip(path.join(__dirname, "dist"), {
-    enableBrotli: true,
-    orderPreferred: ["br", "gz"],
-    setHeaders: (res, path) => {
-      if (path.match(/\.(js|css)$/)) {
-        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-      } else if (path.match(/\.(jpg|jpeg|png|gif|webp|svg)$/)) {
-        res.setHeader("Cache-Control", "public, max-age=2592000");
-      } else {
-        res.setHeader("Cache-Control", "public, max-age=3600");
-      }
-    },
-  }),
-);
+  // Serve Parcel built static files with compression and caching (production only)
+  app.use(
+    expressStaticGzip(path.join(__dirname, "dist"), {
+      enableBrotli: true,
+      orderPreferred: ["br", "gz"],
+      setHeaders: (res, path) => {
+        if (path.match(/\.(js|css)$/)) {
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        } else if (path.match(/\.(jpg|jpeg|png|gif|webp|svg)$/)) {
+          res.setHeader("Cache-Control", "public, max-age=2592000");
+        } else {
+          res.setHeader("Cache-Control", "public, max-age=3600");
+        }
+      },
+    }),
+  );
+}
 
 // Set security headers
 app.use((req, res, next) => {
@@ -43,7 +47,6 @@ app.use((req, res, next) => {
   res.setHeader("X-DNS-Prefetch-Control", "on");
   next();
 });
-const PORT = process.env.PORT || 3000;
 
 // Initialize photo manager
 const photoManager = new PhotoManager(path.join(__dirname, "photography"));
@@ -61,9 +64,33 @@ marked.setOptions({
   gfm: true,
 });
 
-// Serve static files (fallback for development and legacy paths)
-app.use("/src", express.static(path.join(__dirname, "src")));
-app.use("/images", express.static(path.join(__dirname, "src/images")));
+// Serve static files
+if (isDevelopment) {
+  // In development, serve source files directly
+  app.use(express.static(path.join(__dirname, "src")));
+  app.use("/src", express.static(path.join(__dirname, "src")));
+  app.use("/images", express.static(path.join(__dirname, "src/images")));
+  // Handle photography route static files
+  app.use(
+    "/photography/css",
+    express.static(path.join(__dirname, "src", "css")),
+  );
+  app.use("/photography/js", express.static(path.join(__dirname, "src", "js")));
+  app.use(
+    "/photography/lib",
+    express.static(path.join(__dirname, "src", "lib")),
+  );
+  app.use(
+    "/photography/images",
+    express.static(path.join(__dirname, "src", "images")),
+  );
+} else {
+  // In production, serve from dist and src for fallback
+  app.use("/src", express.static(path.join(__dirname, "src")));
+  app.use("/images", express.static(path.join(__dirname, "src/images")));
+  // Handle photography route static files for production
+  app.use("/photography", express.static(path.join(__dirname, "dist")));
+}
 app.use("/photography", express.static(path.join(__dirname, "photography")));
 
 // Serve generated work pages
@@ -71,33 +98,58 @@ app.use("/work", express.static(path.join(__dirname, "work")));
 
 // Serve main page
 app.get("/", (req, res) => {
-  const distIndexPath = path.join(__dirname, "dist", "index.html");
-  const srcIndexPath = path.join(__dirname, "src", "index.html");
-
-  // Serve from dist if available (production), otherwise from src (development)
-  if (fs.existsSync(distIndexPath)) {
-    res.sendFile(distIndexPath);
-  } else {
+  if (isDevelopment) {
+    // In development, serve from src
+    const srcIndexPath = path.join(__dirname, "src", "index.html");
     res.sendFile(srcIndexPath);
+  } else {
+    // In production, serve from dist
+    const distIndexPath = path.join(__dirname, "dist", "index.html");
+    if (fs.existsSync(distIndexPath)) {
+      res.sendFile(distIndexPath);
+    } else {
+      res
+        .status(500)
+        .send("Production build not found. Run 'yarn build' first.");
+    }
   }
 });
 
 // Serve photography page
 app.get("/photography", (req, res) => {
-  const distPhotographyPath = path.join(__dirname, "dist", "photography.html");
-  const srcPhotographyPath = path.join(__dirname, "src", "photography.html");
-
-  // Serve from dist if available (production), otherwise from src (development)
-  if (fs.existsSync(distPhotographyPath)) {
-    res.sendFile(distPhotographyPath);
-  } else {
+  if (isDevelopment) {
+    // In development, serve from src
+    const srcPhotographyPath = path.join(__dirname, "src", "photography.html");
     res.sendFile(srcPhotographyPath);
+  } else {
+    // In production, serve from dist
+    const distPhotographyPath = path.join(
+      __dirname,
+      "dist",
+      "photography.html",
+    );
+    if (fs.existsSync(distPhotographyPath)) {
+      res.sendFile(distPhotographyPath);
+    } else {
+      res
+        .status(500)
+        .send("Production build not found. Run 'yarn build' first.");
+    }
   }
 });
 
 // Explicit 404 route
 app.get("/404", (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "404.html"));
+  if (isDevelopment) {
+    res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
+  } else {
+    const dist404Path = path.join(__dirname, "dist", "404.html");
+    if (fs.existsSync(dist404Path)) {
+      res.status(404).sendFile(dist404Path);
+    } else {
+      res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
+    }
+  }
 });
 
 // Handle old photography.html route (redirect to clean URL)
@@ -113,7 +165,16 @@ app.get("/work/:category/:id", (req, res) => {
   if (fs.existsSync(workPagePath)) {
     res.sendFile(workPagePath);
   } else {
-    res.status(404).sendFile(path.join(__dirname, "404.html"));
+    if (isDevelopment) {
+      res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
+    } else {
+      const dist404Path = path.join(__dirname, "dist", "404.html");
+      if (fs.existsSync(dist404Path)) {
+        res.status(404).sendFile(dist404Path);
+      } else {
+        res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
+      }
+    }
   }
 });
 
@@ -319,7 +380,20 @@ app.get("/api/work/:category/:id", async (req, res) => {
     const filePath = path.join(__dirname, "works", category, `${id}.md`);
 
     if (!(await fs.pathExists(filePath))) {
-      return res.status(404).sendFile(path.join(__dirname, "404.html"));
+      if (isDevelopment) {
+        return res
+          .status(404)
+          .sendFile(path.join(__dirname, "src", "404.html"));
+      } else {
+        const dist404Path = path.join(__dirname, "dist", "404.html");
+        if (fs.existsSync(dist404Path)) {
+          return res.status(404).sendFile(dist404Path);
+        } else {
+          return res
+            .status(404)
+            .sendFile(path.join(__dirname, "src", "404.html"));
+        }
+      }
     }
 
     const content = await fs.readFile(filePath, "utf8");
@@ -391,15 +465,26 @@ app.use((err, req, res, next) => {
   }
 
   // Handle different error types
+  const serve404 = () => {
+    if (isDevelopment) {
+      return path.join(__dirname, "src", "404.html");
+    } else {
+      const dist404Path = path.join(__dirname, "dist", "404.html");
+      return fs.existsSync(dist404Path)
+        ? dist404Path
+        : path.join(__dirname, "src", "404.html");
+    }
+  };
+
   if (err.status === 404 || err.code === "ENOENT") {
-    res.status(404).sendFile(path.join(__dirname, "404.html"));
+    res.status(404).sendFile(serve404());
   } else if (err.status >= 400 && err.status < 500) {
     // Client errors -> 404 page
-    res.status(404).sendFile(path.join(__dirname, "404.html"));
+    res.status(404).sendFile(serve404());
   } else {
     // Server errors -> still show 404 page for user experience
     console.error("Server error:", err);
-    res.status(500).sendFile(path.join(__dirname, "404.html"));
+    res.status(500).sendFile(serve404());
   }
 });
 
@@ -416,7 +501,16 @@ app.use("*", (req, res) => {
     });
   } else {
     // Regular page request
-    res.status(404).sendFile(path.join(__dirname, "404.html"));
+    if (isDevelopment) {
+      res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
+    } else {
+      const dist404Path = path.join(__dirname, "dist", "404.html");
+      if (fs.existsSync(dist404Path)) {
+        res.status(404).sendFile(dist404Path);
+      } else {
+        res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
+      }
+    }
   }
 });
 
