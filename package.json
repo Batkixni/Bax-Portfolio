@@ -4,9 +4,6 @@
   "description": "Simple personal portfolio website for Bax",
   "scripts": {
     "dev": "cross-env NODE_ENV=development PORT=3001 nodemon server.js",
-    "dev:parcel": "parcel src/index.html --port 1234",
-    "dev:full": "concurrently \"parcel src/index.html --port 1234\" \"cross-env PORT=3001 nodemon server.js\" --names \"Parcel,Express\" --prefix-colors \"cyan,green\"",
-    "build": "parcel build src/index.html src/photography.html src/404.html --dist-dir dist --public-url ./",
     "start": "node server.js",
     "generate": "node generate-pages.js",
     "generate:force": "node generate-pages.js --force",
@@ -43,7 +40,6 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
-    "nodemon": "^3.0.2",
-    "parcel": "^2.16.1"
+    "nodemon": "^3.0.2"
   }
 }
