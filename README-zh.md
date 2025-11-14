@@ -85,7 +85,8 @@ yarn dev
 yarn start
 
 # 只生成 Blog 頁面
-node generate-blog.js
+yarn generate       
+yarn generate:force     # 強制生成頁面
 
 ````
 

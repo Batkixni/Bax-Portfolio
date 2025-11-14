@@ -83,12 +83,7 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 # Development Mode (Hot Reload + API)
 yarn dev                 # Runs at http://localhost:3001
 
-# Alternative Development Modes
-yarn dev:parcel         # Parcel only (no backend API) at :1234
-yarn dev:full           # Both Parcel + Express servers
-
 # Production Build & Deploy
-yarn build              # Build optimized files to dist/
 yarn start              # Production server at :3000
 
 # Content Management
