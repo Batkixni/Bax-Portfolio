@@ -3,10 +3,46 @@ const path = require("path");
 const fs = require("fs-extra");
 const marked = require("marked");
 const fm = require("front-matter");
+const compression = require("compression");
+const expressStaticGzip = require("express-static-gzip");
 const PageGenerator = require("./utils/page-generator");
 const PhotoManager = require("./utils/photo-manager");
 
 const app = express();
+
+// Enable gzip compression
+app.use(
+  compression({
+    level: 6,
+    threshold: 1024,
+  }),
+);
+
+// Serve Parcel built static files with compression and caching
+app.use(
+  expressStaticGzip(path.join(__dirname, "dist"), {
+    enableBrotli: true,
+    orderPreferred: ["br", "gz"],
+    setHeaders: (res, path) => {
+      if (path.match(/\.(js|css)$/)) {
+        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      } else if (path.match(/\.(jpg|jpeg|png|gif|webp|svg)$/)) {
+        res.setHeader("Cache-Control", "public, max-age=2592000");
+      } else {
+        res.setHeader("Cache-Control", "public, max-age=3600");
+      }
+    },
+  }),
+);
+
+// Set security headers
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("X-DNS-Prefetch-Control", "on");
+  next();
+});
 const PORT = process.env.PORT || 3000;
 
 // Initialize photo manager
@@ -25,7 +61,7 @@ marked.setOptions({
   gfm: true,
 });
 
-// Serve static files
+// Serve static files (fallback for development and legacy paths)
 app.use("/src", express.static(path.join(__dirname, "src")));
 app.use("/images", express.static(path.join(__dirname, "src/images")));
 app.use("/photography", express.static(path.join(__dirname, "photography")));
@@ -35,12 +71,28 @@ app.use("/work", express.static(path.join(__dirname, "work")));
 
 // Serve main page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  const distIndexPath = path.join(__dirname, "dist", "index.html");
+  const srcIndexPath = path.join(__dirname, "src", "index.html");
+
+  // Serve from dist if available (production), otherwise from src (development)
+  if (fs.existsSync(distIndexPath)) {
+    res.sendFile(distIndexPath);
+  } else {
+    res.sendFile(srcIndexPath);
+  }
 });
 
 // Serve photography page
 app.get("/photography", (req, res) => {
-  res.sendFile(path.join(__dirname, "photography.html"));
+  const distPhotographyPath = path.join(__dirname, "dist", "photography.html");
+  const srcPhotographyPath = path.join(__dirname, "src", "photography.html");
+
+  // Serve from dist if available (production), otherwise from src (development)
+  if (fs.existsSync(distPhotographyPath)) {
+    res.sendFile(distPhotographyPath);
+  } else {
+    res.sendFile(srcPhotographyPath);
+  }
 });
 
 // Explicit 404 route

@@ -1,0 +1,17 @@
+{
+  "extends": "@parcel/config-default",
+  "transformers": {
+    "*.html": ["@parcel/transformer-html"],
+    "*.css": ["@parcel/transformer-css"],
+    "*.js": ["@parcel/transformer-js"],
+    "*.{png,jpg,jpeg,gif,webp}": ["@parcel/transformer-image"],
+    "*.svg": ["@parcel/transformer-svg"]
+  },
+  "optimizers": {
+    "*.js": ["@parcel/optimizer-swc"],
+    "*.css": ["@parcel/optimizer-css"],
+    "*.{png,jpg,jpeg,webp}": ["@parcel/optimizer-image"],
+    "*.svg": ["@parcel/optimizer-svg"]
+  },
+  "reporters": ["@parcel/reporter-cli"]
+}
