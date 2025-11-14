@@ -45,7 +45,9 @@ html {
     }
 
     /* 禁用所有動畫和過渡 */
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         animation-duration: 0s !important;
         animation-delay: 0s !important;
         transition-duration: 0s !important;
@@ -54,7 +56,8 @@ html {
     }
 
     /* 禁用特定的動畫效果 */
-    .cursor, .cursor-follower {
+    .cursor,
+    .cursor-follower {
         display: none !important;
     }
 
@@ -62,7 +65,9 @@ html {
         animation: none !important;
     }
 
-    .fade-in, .stagger-item, .scroll-trigger {
+    .fade-in,
+    .stagger-item,
+    .scroll-trigger {
         opacity: 1 !important;
         transform: none !important;
     }
@@ -75,21 +80,26 @@ html {
         transition: none !important;
     }
 
-    .theme-toggle, .portfolio-item, .blog-post-card {
+    .theme-toggle,
+    .portfolio-item,
+    .blog-post-card {
         transition: none !important;
     }
 
     /* 確保互動元素在減少動畫模式下仍然可用 */
-    .portfolio-item:hover, .portfolio-item:focus {
+    .portfolio-item:hover,
+    .portfolio-item:focus {
         outline: 2px solid var(--text-color) !important;
         outline-offset: 2px !important;
     }
 
-    .nav-link:hover, .nav-link:focus {
+    .nav-link:hover,
+    .nav-link:focus {
         background-color: var(--border-color) !important;
     }
 
-    .theme-toggle:hover, .theme-toggle:focus {
+    .theme-toggle:hover,
+    .theme-toggle:focus {
         background-color: var(--border-color) !important;
     }
 
@@ -99,7 +109,9 @@ html {
     }
 
     /* 確保所有元素立即可見 */
-    .animate-element, .fade-in, .stagger-item {
+    .animate-element,
+    .fade-in,
+    .stagger-item {
         opacity: 1 !important;
         transform: none !important;
         animation: none !important;
@@ -2239,7 +2251,11 @@ body[data-back-navigation="true"] .loading {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.02) 0%,
+        transparent 70%
+    );
     pointer-events: none;
 }
 
@@ -2304,7 +2320,11 @@ body[data-back-navigation="true"] .loading {
     margin-bottom: 1.5rem;
     color: var(--text-color);
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--text-color) 0%, var(--text-color) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--text-color) 0%,
+        var(--text-color) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
 }
@@ -2343,7 +2363,12 @@ body[data-back-navigation="true"] .loading {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
     transition: left 0.5s ease;
 }
 
@@ -2788,7 +2813,7 @@ body[data-back-navigation="true"] .loading {
     --video-sm-time-font-size: 14px;
     --video-sm-start-duration-bg: rgba(0 0 0 / 0.64);
     --video-sm-start-duration-padding: 3px 6px;
-    --video-sm-start-duration-color: var(--video: controls-color);
+    --video-sm-start-duration-color: var(--video-controls-color);
 
     /* Captions. */
     --video-captions-offset: 78px;
@@ -2804,7 +2829,6 @@ body[data-back-navigation="true"] .loading {
 }
 
 .video-container media-player[data-view-type="video"] {
-
     aspect-ratio: 16/9;
     background: #000;
 }
@@ -2858,15 +2882,6 @@ body[data-back-navigation="true"] .loading {
 .blog-content .video-container + h5,
 .blog-content .video-container + h6 {
     margin-top: 1.5rem;
-}
-
-    .blog-post-excerpt {
-        font-size: 0.95rem;
-    }
-
-    .no-posts-message {
-        padding: 3rem 1rem;
-    }
 }
 
 /* Blog Tags Section */
@@ -3065,8 +3080,6 @@ body[data-back-navigation="true"] .loading {
         font-size: 0.9rem;
     }
 }
-    text-decoration: none;
-}
 
 /* Portfolio Item as Link */
 .portfolio-item {
@@ -3247,7 +3260,9 @@ body[data-back-navigation="true"] .loading {
     object-position: center;
     border-radius: 8px;
     box-shadow: var(--box-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     display: block;
     background: var(--bg-color);
 }

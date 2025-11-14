@@ -52,7 +52,7 @@ A modern, responsive portfolio website specifically built for **Motion Designers
     yarn dev
     ```
 
-5.  Open your browser and visit `http://localhost:3000`
+4.  Open your browser and visit `http://localhost:3001`
 
 ---
 
@@ -80,20 +80,15 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 ## 💻 Development Commands
 
 ```bash
-# Development Mode (Hot Reload)
-yarn dev
+# Development Mode (Hot Reload + API)
+yarn dev                 # Runs at http://localhost:3001
 
-<<<<<<< Updated upstream
-# Production Mode
-yarn start
-
-# Generate Blog Pages Only
-node generate-blog.js
-=======
 # Production Build & Deploy
 yarn start              # Production server at :3000
->>>>>>> Stashed changes
 
+# Content Management
+yarn generate           # Generate work pages
+yarn generate:force     # Force regenerate all pages
 ```
 
 -----
@@ -113,9 +108,10 @@ yarn start              # Production server at :3000
 ### Backend Technologies
 
   * Node.js - Server Environment
-  * Express.js - Web Framework
+  * Express.js - Web Framework with compression & caching
   * Marked - Markdown Parser
   * Front-Matter - Metadata Processing
+  * **Sharp** - High-performance image processing
 
 -----
 

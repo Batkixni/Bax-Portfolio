@@ -69,7 +69,7 @@ class PhotoManager {
             !existingPhoto.exif ||
             Object.keys(existingPhoto.exif || {}).length === 0
           ) {
-            console.log(`Update EXIF Information: ${filename}`);
+            console.log(`Update EFIF information: ${filename}`);
 
             const exifData = await this.extractExif(filePath);
             if (exifData) {
