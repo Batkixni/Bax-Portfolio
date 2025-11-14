@@ -83,11 +83,16 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 # Development Mode (Hot Reload)
 yarn dev
 
+<<<<<<< Updated upstream
 # Production Mode
 yarn start
 
 # Generate Blog Pages Only
 node generate-blog.js
+=======
+# Production Build & Deploy
+yarn start              # Production server at :3000
+>>>>>>> Stashed changes
 
 ```
 
