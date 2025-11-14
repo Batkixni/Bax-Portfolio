@@ -100,7 +100,6 @@ yarn generate:force     # Force regenerate all pages
   * HTML5 - Semantic Markup
   * CSS3 - Modern CSS features and CSS Variables
   * JavaScript ES6+ - Modular JavaScript
-  * **Parcel** - Modern bundler with zero-config optimization
   * GSAP 3.12 - Animation Engine
   * P5.js - Particle System
   * HTMX - Dynamic Content Loading
@@ -113,15 +112,6 @@ yarn generate:force     # Force regenerate all pages
   * Marked - Markdown Parser
   * Front-Matter - Metadata Processing
   * **Sharp** - High-performance image processing
-  
-### ⚡ Performance Optimization
-
-This project now uses **Parcel** for modern front-end optimization:
-- **60-70% faster loading times**
-- **40-50% smaller asset sizes** 
-- **Automatic code splitting** and tree shaking
-- **Built-in hot module replacement** (HMR)
-- **Optimized images** and compressed resources
 
 -----
 
