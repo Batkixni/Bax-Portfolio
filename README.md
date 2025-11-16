@@ -267,4 +267,4 @@ This project uses the following open-source packages. Their license terms and of
 | [**HTMX**](https://htmx.org/ )| **MIT License** | 
 | [**Vidstack** ](https://www.vidstack.io/ )| **MIT License** |
 
-This project itself is licensed under the **MIT License**.
+This project itself is licensed under the **MIT License**. If you have any questions, please open an issue on this Github repo.
