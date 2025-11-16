@@ -30,6 +30,61 @@
 
 -----
 
+## ✒️ 快速開始 (Quick Start)
+
+### 環境需求 (Environment Requirements)
+
+  * Node.js 16.0+
+  * **Yarn (推薦)** 或 npm/pnpm
+
+### 安裝步驟 (Installation Steps)
+
+1.  複製專案
+
+    ```bash
+    git clone https://github.com/Batkixni/Bax-Portfolio.git
+    cd bax-website
+    ```
+
+2.  安裝依賴
+
+    ```bash
+    yarn
+    ```
+
+3.  啟動開發伺服器
+
+    ```bash
+    yarn dev
+    ```
+
+4.  開啟瀏覽器訪問 `http://localhost:3000`
+
+-----
+
+## 📝 新增作品 (Add New Portfolio Work)
+
+1.  在 `works/motion/` 或 `works/graphic/` 目錄下建立新的 `.md` 檔案。
+
+2.  使用以下格式：
+
+    ```markdown
+    ---
+    title: "Project Title"
+    description: "Project Description"
+    image: "/src/images/work-cover.jpg"
+    date: "2024"
+    tags: ["tag1", "tag2"]
+    category: "motion-design"
+    ---
+
+    # Project Content
+
+    這裡撰寫作品的詳細說明...
+    ```
+    
+-----
+
 ## 🛠️ 客製化指南 (Customization Guide)
 
 ### 1\. 修改基本資訊 (Title, Footer & Bio)
@@ -160,61 +215,6 @@ if (uiuxGrid && typeof htmx !== "undefined") {
 
 **步驟 D：建立資料夾**
 在專案根目錄的 `works/` 資料夾下，建立對應的資料夾（如 `works/uiux/`），並放入 `.md` 文件。
-
------
-
-## ✒️ 快速開始 (Quick Start)
-
-### 環境需求 (Environment Requirements)
-
-  * Node.js 16.0+
-  * **Yarn (推薦)** 或 npm/pnpm
-
-### 安裝步驟 (Installation Steps)
-
-1.  複製專案
-
-    ```bash
-    git clone https://github.com/Batkixni/Bax-Portfolio.git
-    cd bax-website
-    ```
-
-2.  安裝依賴
-
-    ```bash
-    yarn
-    ```
-
-3.  啟動開發伺服器
-
-    ```bash
-    yarn dev
-    ```
-
-4.  開啟瀏覽器訪問 `http://localhost:3000`
-
------
-
-## 📝 新增作品 (Add New Portfolio Work)
-
-1.  在 `works/motion/` 或 `works/graphic/` 目錄下建立新的 `.md` 檔案。
-
-2.  使用以下格式：
-
-    ```markdown
-    ---
-    title: "Project Title"
-    description: "Project Description"
-    image: "/src/images/work-cover.jpg"
-    date: "2024"
-    tags: ["tag1", "tag2"]
-    category: "motion-design"
-    ---
-
-    # Project Content
-
-    這裡撰寫作品的詳細說明...
-    ```
 
 -----
 
