@@ -127,8 +127,9 @@ To ensure your website displays the correct preview image and information when s
 <meta property="og:image" content="./images/og-preview.svg" /> <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:site_name" content="My Portfolio" />
-<meta property="og:locale" content="en_US" /> ```
+<meta property="og:locale" content="en_US" />
 
+````
 ---
 
 ## ⚙️ Advanced Configuration
