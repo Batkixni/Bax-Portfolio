@@ -57,6 +57,29 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 
 -----
 
+## 📝 Add New Portfolio Work
+
+1.  Create a new `.md` file in the `works/motion/` or `works/graphic/` directory.
+
+2.  Use the following format:
+    ```markdown
+    ---
+    title: "Project Title"
+    description: "Project Description"
+    image: "/src/images/work-cover.jpg"
+    date: "2024"
+    tags: ["tag1", "tag2"]
+    category: "motion-design"
+    ---
+
+    # Project Content
+
+    Write the detailed description of the project here...
+    ```
+
+-----
+
+
 ## 🛠️ Customization Guide
 
 ### 1\. Modify Basic Info (Title, Footer & Bio)
@@ -188,28 +211,6 @@ Copy an existing Section block and modify its `id`, `hx-get` path, and `hx-targe
 In the project's root `works/` directory, create the corresponding folder (e.g., `works/uiux/`) and place your `.md` files inside.
 
 -----
-
-## 📝 Add New Portfolio Work
-
-1.  Create a new `.md` file in the `works/motion/` or `works/graphic/` directory.
-
-2.  Use the following format:
-    ```markdown
-    ---
-    title: "Project Title"
-    description: "Project Description"
-    image: "/src/images/work-cover.jpg"
-    date: "2024"
-    tags: ["tag1", "tag2"]
-    category: "motion-design"
-    ---
-
-    # Project Content
-
-    Write the detailed description of the project here...
-    ```
-
----
 ## 💻 Development Commands
 
 ```bash
