@@ -11,9 +11,9 @@ async function build() {
       "src/css",
       "src/js",
       "src/images",
-      "works/motion-design",
-      "works/visual-design",
-      "works/cinematic-design",
+      "works/motion",
+      "works/visual",
+      "works/cinematic",
     ];
 
     for (const dir of directories) {
@@ -41,7 +41,9 @@ async function build() {
 </svg>`;
 
         await fs.writeFile(imagePath.replace(".jpg", ".svg"), svgContent);
-        console.log(`✅ Create Placeholder Images: ${imagePath.replace(".jpg", ".svg")}`);
+        console.log(
+          `✅ Create Placeholder Images: ${imagePath.replace(".jpg", ".svg")}`,
+        );
       }
     }
 
