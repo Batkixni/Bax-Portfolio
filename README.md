@@ -27,7 +27,8 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 * **Static Generation** - Automatically generates portfolio and blog detail pages.
 * **Modular Architecture** - Easy-to-maintain and extendable code structure.
 
----
+-----
+
 ## ✒️ Quick Start
 
 ### Environment Requirements
@@ -54,7 +55,139 @@ A modern, responsive portfolio website specifically built for **Motion Designers
 
 4.  Open your browser and visit `http://localhost:3001`
 
+-----
+
+## 🛠️ Customization Guide
+
+### 1\. Modify Basic Info (Title, Footer & Bio)
+
+You need to modify the `<title>` tag and Footer information in the following files:
+
+  * `src/index.html` (Homepage)
+  * `src/photography.html` (Photography Page)
+  * `src/404.html` (Error Page)
+  * `templates/work-template.html` (Work Detail Page Template)
+
+**Modify Title:**
+Find `<title>{{title}} - Bax Portfolio</title>` and change it to your desired website title.
+
+**Modify Bio:**
+In `src/index.html`, find the **Hero Section** under \`\` and edit the text introduction.
+
+**Modify Footer:**
+In all the files listed above, find the \`\` section and update the copyright and contact information.
+
+### 2\. Modify Logo & Avatar (Branding)
+
+Please replace the following images in the `src/images/` folder:
+
+  * `favico.svg` & `favico.jpg`: Website Logo (Browser favicon).
+  * `header.jpg`: The circular personal avatar displayed in the Homepage Hero Section.
+
+### 3\. Modify Loading Animation
+
+To replace the loading screen with your own SVG logo, please modify the four HTML files mentioned above (index, photography, 404, work-template).
+
+Find the \`\` section and paste your SVG code to replace the existing `<svg id="loading-svg" ...>` block.
+
+### 4\. Configure Social Media Preview (Open Graph / SEO)
+
+To ensure your website displays the correct preview image and information when shared on platforms like Facebook, Twitter, or Line, please modify the \`\` section in all HTML files.
+
+**Example Configuration:**
+
+````html
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yourdomain.com/" />
+<meta property="og:title" content="Your Name - Creative Portfolio" />
+<meta property="og:description" content="Visual designer / Motion Graphics" />
+<meta property="og:image" content="./images/og-preview.svg" /> <meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="My Portfolio" />
+<meta property="og:locale" content="en_US" /> ```
+
 ---
+
+## ⚙️ Advanced Configuration
+
+### Remove Photography Page
+
+If you don't need the photography portfolio feature, follow these steps to hide it:
+
+1.  Open `src/index.html`.
+2.  Find the `` section and delete the link inside `<div class="nav-links">`.
+3.  Simply delete the `src/photography.html` file.
+    *(Note: A deeper removal involves `src/js/photography.js` and backend logic, but these steps are sufficient to make the page inaccessible to users and will not affect the site's operation.)*
+
+### Customize Portfolio Sections
+
+By default, the site includes **Motion**, **Graphic**, and **Cinematic** sections.
+
+#### 1. Simple Section Deletion
+
+If you only need to delete a section (e.g., Cinematic), just delete the entire corresponding `<section id="cinematic" ...>` block from `src/index.html`.
+
+#### 2. Add or Rename Sections (Advanced)
+
+To add a new category (using "UI/UX" as an example) or modify paths, you must edit three files in order:
+
+**Step A: Modify `build.js`**
+Update the directory structure and Markdown validation paths:
+
+```javascript
+// Ensure all directories exist
+const directories = [
+  // ...other paths
+  "works/motion",
+  "works/uiux", // Modify or add your path
+];
+
+// Validate markdown files
+const workDirs = [
+  "works/motion",
+  "works/uiux", // Modify or add your path
+];
+````
+
+**Step B: Modify `src/js/app.js`**
+Find the `// Immediately reload HTMX content` comment, then add your grid variable and reload logic:
+
+```javascript
+// 1. Define variables (recommend naming as xxxGrid)
+const motionGrid = document.getElementById("motion-grid");
+const uiuxGrid = document.getElementById("uiux-grid"); // Add new
+
+// 2. Copy and modify the reload logic
+if (uiuxGrid && typeof htmx !== "undefined") {
+    console.log("Reloading uiux grid on pageshow");
+    htmx.trigger(uiuxGrid, "load");
+}
+```
+
+**Step C: Modify `src/index.html`**
+Copy an existing Section block and modify its `id`, `hx-get` path, and `hx-target`:
+
+```html
+<section id="uiux" class="portfolio-section animate-element">
+    <h2 class="section-title animate-element">UI/UX Designs</h2>
+    <div
+        class="portfolio-grid"
+        id="uiux-grid" 
+        hx-get="/api/works/uiux" 
+        hx-trigger="load"
+        hx-target="#uiux-grid"
+    >
+        <div class="loading">Loading...</div>
+    </div>
+</section>
+```
+
+*(Note: The `id="uiux-grid"` must match the variable in `app.js`; the `hx-get` path must match the folder in `build.js`.)*
+
+**Step D: Create the Folder**
+In the project's root `works/` directory, create the corresponding folder (e.g., `works/uiux/`) and place your `.md` files inside.
+
+-----
 
 ## 📝 Add New Portfolio Work
 
