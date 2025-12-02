@@ -2,6 +2,8 @@
 
 A modern, responsive portfolio website specifically built for **Motion Designers**, combining smooth animations, an elegant user experience, and an extremely simplified content management workflow.
 
+> Disclaimer: I am planning to restructuring this project to Typescript & Tailwind CSS based framework, the current version is still stable but may a little tricky to use.
+
 ![Preview](https://files.catbox.moe/opt3u1.jpg)
 
 [中文版](https://github.com/Batkixni/Bax-Portfolio/blob/main/README-zh.md)
