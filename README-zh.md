@@ -4,6 +4,9 @@
 
 ![Preview](https://files.catbox.moe/opt3u1.jpg)
 
+> [!IMPORTANT]
+> 這個專案已經全面用Astro與Tailwind重新構建，如果你需要最新並持續維護的版本，請到[這裡](https://github.com/Batkixni/astro-regulus)
+
 ## 🌠 核心功能特色 (Core Key Features)
 
 ### 作品與內容管理 (Portfolio & Content Management)
