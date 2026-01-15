@@ -2,7 +2,8 @@
 
 A modern, responsive portfolio website specifically built for **Motion Designers**, combining smooth animations, an elegant user experience, and an extremely simplified content management workflow.
 
-> Disclaimer: This project have been rebuild in Astro and Tailwind CSS, to use the new and under maintenance version, please go to [here](https://github.com/Batkixni/astro-regulus)
+> [!IMPORTANT]
+> This project have been rebuild in Astro and Tailwind CSS, to use the new and under maintenance version, please go to [here](https://github.com/Batkixni/astro-regulus)
 
 ![Preview](https://files.catbox.moe/opt3u1.jpg)
 
